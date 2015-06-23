@@ -1,13 +1,21 @@
 package business;
 
-import java.util.Calendar;
+import java.util.Date;
 
 public class Leilao {
 
 	private int id;
-	private Usuario usuario;
-	private Calendar dataInicio;
-	private Calendar dataFim;	
-	
-	
+
+	private char tipoLeilao;
+
+	private char tipoLance;
+
+	private Date dataInicio;
+
+	private Date dataFim;
+
+	private int idVendedor;
+
+	private double preco;
+
 }
