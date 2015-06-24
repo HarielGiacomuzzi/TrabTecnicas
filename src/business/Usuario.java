@@ -8,6 +8,14 @@ public class Usuario {
 	private String CNPJ;
 	private String email;
 
+	public Usuario(int id2, String nome2, String cpf2, String cnpj2,
+			String email2) {
+		this.nome = nome2;
+		this.cpf = cpf2;
+		this.CNPJ = cnpj2;
+		this.id = id2;
+		this.email = email2;
+	}
 	public int getId() {
 		return id;
 	}

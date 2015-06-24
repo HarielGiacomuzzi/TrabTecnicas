@@ -6,6 +6,27 @@ import java.sql.SQLException;
 
 public class OracleJDBC {
 	
+	public Connection getConnection(){
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+ 
+		} catch (ClassNotFoundException e) {
+			System.out.println("Where is your Oracle JDBC Driver?");
+			e.printStackTrace();
+			return null;
+		} 
+		Connection connection = null;
+		try {
+			connection = DriverManager.getConnection("jdbc:oracle:thin:trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin","trabtecnicas");
+		} catch (SQLException e) {
+			System.out.println("Connection Failed! Check output console");
+			e.printStackTrace();
+			return null;
+ 
+		}
+			return connection;		
+	}
+	
 	public void tryConnection(){
 			System.out.println("-------- Oracle JDBC Connection Testing ------");
 			 
