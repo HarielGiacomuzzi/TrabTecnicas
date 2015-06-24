@@ -4,6 +4,14 @@ import business.UsuarioDAO;
 import business.Usuario;
 
 public class UsuarioDAOOracle implements UsuarioDAO {
+	private static UsuarioDAOOracle ref;
+	
+	public static UsuarioDAOOracle getInstance(){
+		if(ref == null){
+			ref = new UsuarioDAOOracle();
+		}
+		return ref;
+	}
 
 
 	/**

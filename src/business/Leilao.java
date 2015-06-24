@@ -1,8 +1,11 @@
 package business;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Leilao {
+	
+	private ArrayList<Lance> lances;
 
 	private int id;
 
@@ -17,5 +20,9 @@ public class Leilao {
 	private int idVendedor;
 
 	private double preco;
+	
+	public void addLance(){
+		
+	}
 
 }
