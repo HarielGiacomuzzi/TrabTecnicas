@@ -109,7 +109,7 @@ public class UsuarioDAOOracle implements UsuarioDAO {
             con.close();
             return (ret>0);
         } catch (SQLException ex) {
-            throw new UsuarioDAOException("Falha ao adicionar.", ex);
+            throw new UsuarioDAOException("Falha ao remover.", ex);
         }
 	}
 

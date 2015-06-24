@@ -1,11 +1,13 @@
 package business;
 
+import Persistencia.CategoriaDAOException;
+
 public interface CategoriaDAO {
 
-	public abstract boolean getCategoriaByID(int id);
+	public abstract Categoria getCategoriaByID(int id) throws CategoriaDAOException;
 
-	public abstract boolean insertBem(Bem bem);
+	public abstract boolean insertCategoria(Categoria cat) throws CategoriaDAOException;
 
-	public abstract boolean removeBem(Bem bem);
+	public abstract boolean removeCategoria(Categoria cat) throws CategoriaDAOException;
 
 }

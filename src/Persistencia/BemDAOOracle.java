@@ -5,9 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import business.BemDAO;
 import business.Bem;
-import business.Usuario;
+import business.BemDAO;
 
 public class BemDAOOracle implements BemDAO {
 
@@ -40,18 +39,41 @@ public class BemDAOOracle implements BemDAO {
 
 
 	/**
+	 * @throws BemDAOException 
 	 * @see Negocio.BemDAO#insertBem(Negocio.Bem)
 	 */
-	public boolean insertBem(Bem bem) {
-		return false;
+	public boolean insertBem(Bem bem) throws BemDAOException {
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO bens (id, idCategoria, descBreve, descCompleta) VALUES (?,?,?,?)");
+            stmt.setInt(1, bem.getId());
+            stmt.setInt(2, bem.getIdCategoria());
+            stmt.setString(3, bem.getDescBreve());
+            stmt.setString(4, bem.getDescCompleta());
+            int ret = stmt.executeUpdate();
+            con.close();
+            return (ret>0);
+        } catch (SQLException ex) {
+            throw new BemDAOException("Falha ao adicionar.", ex);
+        }
 	}
 
 
 	/**
+	 * @throws BemDAOException 
 	 * @see Negocio.BemDAO#removeBem(Negocio.Bem)
 	 */
-	public boolean removeBem(Bem bem) {
-		return false;
+	public boolean removeBem(Bem bem) throws BemDAOException {
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement stmt = con.prepareStatement("delete from bens where id = ?");
+            stmt.setInt(1, bem.getId());
+            int ret = stmt.executeUpdate();
+            con.close();
+            return (ret>0);
+        } catch (SQLException ex) {
+            throw new BemDAOException("Falha ao remover.", ex);
+        }
 	}
 
 }
