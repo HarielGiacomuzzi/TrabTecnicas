@@ -15,8 +15,12 @@ public class ControlerUsuarios {
 		return null;
 	}
 
-	public void insertUsuario(String nome, String cpf, String cnpj, String email) {
-		
+	public boolean insertUsuario(String nome, String cpf, String cnpj, String email) {
+		Usuario user = leilao.insertUsuario(nome, cpf,cnpj,email);
+		if(user != null){
+			return true;
+		}
+		return false;
 	}
 
 	public void removeUser(int id) {
