@@ -44,7 +44,24 @@ public class LanceDAOOracle implements LanceDAO {
         }
 	}
 
-
+	public int getNextId() throws LanceDAOException{
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement sta = con.prepareStatement("select MAX(id_lance) from LANCEs");
+            ResultSet resultado = sta.executeQuery();
+            int id = 0;
+            if(resultado.next()) {
+                id = resultado.getInt(1);
+            }
+            sta.close();
+            con.close();
+            return id + 1;
+        } catch (SQLException ex) {
+            throw new LanceDAOException(ex.getMessage());
+        }
+		
+	}
+	
 	/**
 	 * @throws LanceDAOException 
 	 * @see Negocio.LanceDAO#getLanceByLeilao(Negocio.Leilao)

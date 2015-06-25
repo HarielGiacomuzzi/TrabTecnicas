@@ -50,6 +50,24 @@ public class LeilaoDAOOracle implements LeilaoDAO {
 	}
 
 
+	public int getNextId() throws LeilaoDAOException{
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement sta = con.prepareStatement("select MAX(id_leilao) from leilao");
+            ResultSet resultado = sta.executeQuery();
+            int id = 0;
+            if(resultado.next()) {
+                id = resultado.getInt(1);
+            }
+            sta.close();
+            con.close();
+            return id + 1;
+        } catch (SQLException ex) {
+            throw new LeilaoDAOException(ex.getMessage());
+        }
+		
+	}
+	
 	/**
 	 * @throws LeilaoDAOException 
 	 * @see Negocio.LeilaoDAO#insertLeilao(Negocio.Leilao)

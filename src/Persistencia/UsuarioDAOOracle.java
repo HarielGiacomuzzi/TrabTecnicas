@@ -18,6 +18,24 @@ public class UsuarioDAOOracle implements UsuarioDAO {
 	}
 
 
+	public int getNextId() throws UsuarioDAOException{
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement sta = con.prepareStatement("select MAX(id_usuario) from USUARIOS");
+            ResultSet resultado = sta.executeQuery();
+            int id = 0;
+            if(resultado.next()) {
+                id = resultado.getInt(1);
+            }
+            sta.close();
+            con.close();
+            return id + 1;
+        } catch (SQLException ex) {
+            throw new UsuarioDAOException(ex.getMessage());
+        }
+		
+	}
+	
 	/**
 	 * @throws UsuarioDAOException 
 	 * @see Negocio.UsuarioDAO#getUserByID(int)

@@ -17,7 +17,9 @@ public class OracleJDBC {
 		} 
 		Connection connection = null;
 		try {
-			connection = DriverManager.getConnection("jdbc:oracle:thin:trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin","trabTecnicas");
+			connection = DriverManager.getConnection(
+					"jdbc:oracle:thin:@trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin",
+					"trabTecnicas");
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();
@@ -49,7 +51,7 @@ public class OracleJDBC {
 			try {
 	 
 				connection = DriverManager.getConnection(
-						"jdbc:oracle:thin:trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin",
+						"jdbc:oracle:thin:@trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin",
 						"trabTecnicas");
 	 
 			} catch (SQLException e) {
