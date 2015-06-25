@@ -10,7 +10,14 @@ import business.Leilao;
 import business.LeilaoDAO;
 
 public class LeilaoDAOOracle implements LeilaoDAO {
-
+	private static LeilaoDAOOracle ref;
+	
+	public static LeilaoDAOOracle getInstance(){
+		if(ref == null){
+			ref = new LeilaoDAOOracle();
+		}
+		return ref;
+	}
 
 	/**
 	 * @throws LeilaoDAOException 

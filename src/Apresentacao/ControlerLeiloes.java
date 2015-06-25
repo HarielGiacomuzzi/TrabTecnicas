@@ -7,13 +7,21 @@ import business.Leilao;
 import business.Usuario;
 
 public class ControlerLeiloes {
-
+	LeilaoFachada leilaoFachada;
+	
+	public ControlerLeiloes(){
+		leilaoFachada = new LeilaoFachada();
+	}
 	public List<Leilao> getLeiloes() {
 		return null;
 	}
 
-	public void insertLeilao(char tipoLeilao, char tipoLance, Date inicio, Date fim, Usuario vendedor, double preco) {
-
+	public boolean insertLeilao(char tipoLeilao, char tipoLance, Date inicio, Date fim, Usuario vendedor, double preco) {
+		Leilao leilao = leilaoFachada.insertLeilao(tipoLeilao,tipoLance,inicio,fim,vendedor,preco);
+		if(leilao != null){
+			return true;
+		}
+		return false;
 	}
 
 	public void removeLeilao(int id) {
