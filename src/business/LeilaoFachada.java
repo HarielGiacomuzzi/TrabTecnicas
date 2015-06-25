@@ -1,15 +1,20 @@
 package business;
 
+import java.util.Date;
 import java.util.List;
 
+import Persistencia.LeilaoDAOException;
+import Persistencia.LeilaoDAOOracle;
 import Persistencia.UsuarioDAOException;
 import Persistencia.UsuarioDAOOracle;
 
 public class LeilaoFachada {
 	UsuarioDAOOracle usuarioDao;
+	LeilaoDAOOracle leilaoDao;
 	
 	public LeilaoFachada(){
 		usuarioDao = UsuarioDAOOracle.getInstance();
+		leilaoDao = LeilaoDAOOracle.getInstance();
 	}
 	
 	public List<Usuario> getAllUsers() {
@@ -31,6 +36,23 @@ public class LeilaoFachada {
 		} catch(UsuarioDAOException e){
 			/*INSERIR throw de Exceção da camada de negócio*/
 			return null;
+		}
+	}
+	
+	public Leilao insertLeilao(char tipoLeilao, char tipoLance, Date inicio, Date fim, Usuario vendedor, double preco){
+		int id = 1; /*INSERIR LOGIDA DO ID*/
+		Leilao leilao = new Leilao(id,tipoLeilao,tipoLance,inicio,fim,vendedor.getId(),preco);
+		
+		try{
+			boolean ok = leilaoDao.insertLeilao(leilao);
+			if(ok){
+				return leilao;
+			}
+			return null;
+		} catch(LeilaoDAOException e){
+			/*INSERIR throw de Exceção da camada de negócio*/
+			return null;
+			
 		}
 	}
 	
