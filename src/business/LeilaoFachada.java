@@ -3,18 +3,22 @@ package business;
 import java.util.Date;
 import java.util.List;
 
+import Persistencia.BemDAOException;
+import Persistencia.BemDAOOracle;
 import Persistencia.LeilaoDAOException;
 import Persistencia.LeilaoDAOOracle;
 import Persistencia.UsuarioDAOException;
 import Persistencia.UsuarioDAOOracle;
 
 public class LeilaoFachada {
-	UsuarioDAOOracle usuarioDao;
-	LeilaoDAOOracle leilaoDao;
+	UsuarioDAO usuarioDao;
+	LeilaoDAO leilaoDao;
+	BemDAO bemDao;
 	
 	public LeilaoFachada(){
 		usuarioDao = UsuarioDAOOracle.getInstance();
 		leilaoDao = LeilaoDAOOracle.getInstance();
+		bemDao = BemDAOOracle.getInstance();
 	}
 	
 	public List<Usuario> getAllUsers() {
@@ -54,6 +58,24 @@ public class LeilaoFachada {
 			return null;
 			
 		}
+	}
+	
+	public Bem insertBem(int idLeilao, String descBreve, String descCompleta, int idCategoria){
+		try{
+		int id = bemDao.getNextId();
+		Bem bem = new Bem(id,idLeilao,descBreve,descCompleta,idCategoria);
+		
+		boolean ok = bemDao.insertBem(bem);
+		
+		if(ok){
+			return bem;
+		}
+		return null;
+		
+		} catch(BemDAOException e){
+			return null;
+		}
+		
 	}
 	
 	

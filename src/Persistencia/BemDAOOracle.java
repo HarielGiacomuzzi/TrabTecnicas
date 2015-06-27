@@ -9,6 +9,14 @@ import business.Bem;
 import business.BemDAO;
 
 public class BemDAOOracle implements BemDAO {
+	private static BemDAOOracle ref;
+	
+	public static BemDAOOracle getInstance(){
+		if(ref==null){
+			ref = new BemDAOOracle();
+		}
+		return ref;
+	}
 
 
 	/**
@@ -27,7 +35,8 @@ public class BemDAOOracle implements BemDAO {
                 String descBreve = resultado.getString("descBreve");
                 String descCompleta = resultado.getString("descCompleta");
                 int idCategoria = resultado.getInt("idCategoria");
-                b = new Bem(id1, descBreve, descCompleta, idCategoria);
+                int idLeilao = resultado.getInt("idLeilao");
+                b = new Bem(id1,idLeilao, descBreve, descCompleta, idCategoria);
             }
             sta.close();
             con.close();

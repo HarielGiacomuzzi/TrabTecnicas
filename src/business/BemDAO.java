@@ -9,5 +9,7 @@ public interface BemDAO {
 	public abstract boolean insertBem(Bem bem) throws BemDAOException;
 
 	public abstract boolean removeBem(Bem bem) throws BemDAOException;
+	
+	public int getNextId() throws BemDAOException;
 
 }

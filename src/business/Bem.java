@@ -2,12 +2,13 @@ package business;
 
 public class Bem {
 
-	public Bem(int id1, String descBreve2, String descCompleta2,
+	public Bem(int id1, int idLeilao, String descBreve2, String descCompleta2,
 			int idCategoria2) {
 		this.id = id1;
 		this.descBreve = descBreve2;
 		this.descCompleta = descCompleta2;
 		this.idCategoria = idCategoria2;
+		this.idLeilao = idLeilao;
 	}
 	
 	public int getId() {
@@ -41,6 +42,10 @@ public class Bem {
 	public void setIdCategoria(int idCategoria) {
 		this.idCategoria = idCategoria;
 	}
+	
+	public int getIdLeilao(){
+		return idLeilao;
+	}
 
 	private int id;
 
@@ -49,5 +54,7 @@ public class Bem {
 	private String descCompleta;
 
 	private int idCategoria;
+	
+	private int idLeilao;
 
 }
