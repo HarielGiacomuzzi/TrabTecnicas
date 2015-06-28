@@ -11,13 +11,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 public class windowUserInsert extends JFrame {
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField textFieldNome;
+	private JTextField textFieldCPF;
+	private JTextField textFieldCNPJ;
+	private JTextField textFieldEmail;
+	private JTextField textFieldSenha;
+	private ControlerUsuarios controler;
 
 	/**
 	 * Launch the application.
@@ -39,8 +42,9 @@ public class windowUserInsert extends JFrame {
 	 * Create the frame.
 	 */
 	public windowUserInsert() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		controler = new ControlerUsuarios();
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setBounds(100, 100, 450, 370);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,30 +73,55 @@ public class windowUserInsert extends JFrame {
 		
 		JLabel lblEmail = new JLabel("E-mail");
 		lblEmail.setBounds(16, 175, 61, 16);
-		contentPane.add(lblEmail);
+		contentPane.add(lblEmail);		
 		
-		textField = new JTextField();
-		textField.setBounds(107, 40, 134, 28);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		JLabel lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(16, 228, 61, 16);
+		contentPane.add(lblSenha);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(107, 83, 134, 28);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		textFieldNome = new JTextField();
+		textFieldNome.setBounds(107, 40, 134, 28);
+		contentPane.add(textFieldNome);
+		textFieldNome.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(107, 129, 134, 28);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		textFieldCPF = new JTextField();
+		textFieldCPF.setBounds(107, 83, 134, 28);
+		contentPane.add(textFieldCPF);
+		textFieldCPF.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(107, 169, 134, 28);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		textFieldCNPJ = new JTextField();
+		textFieldCNPJ.setBounds(107, 129, 134, 28);
+		contentPane.add(textFieldCNPJ);
+		textFieldCNPJ.setColumns(10);
+		
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(107, 169, 134, 28);
+		contentPane.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
+		
+		textFieldSenha = new JTextField();
+		textFieldSenha.setColumns(10);
+		textFieldSenha.setBounds(107, 216, 134, 28);
+		contentPane.add(textFieldSenha);
 		
 		JButton btnInsertuser = new JButton("InsertUser");
-		btnInsertuser.setBounds(6, 214, 117, 29);
+		btnInsertuser.setBounds(6, 273, 117, 29);
+		btnInsertuser.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean ok = controler.insertUsuario(textFieldNome.getText(), textFieldCPF.getText(), textFieldCNPJ.getText(), textFieldEmail.getText(), textFieldSenha.getText());
+				if(ok){
+					JOptionPane.showMessageDialog(null, "Usuario Cadastrado com Sucesso!");
+				} else{
+					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar usuario.");
+				}
+			}
+		});
 		contentPane.add(btnInsertuser);
+		
+		
+		
+
+		
+
 	}
 }

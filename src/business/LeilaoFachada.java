@@ -25,12 +25,12 @@ public class LeilaoFachada {
 		return null;
 	}
 
-	public Usuario insertUsuario(String nome, String cpf, String cnpj, String email) {
+	public Usuario insertUsuario(String nome, String cpf, String cnpj, String email,String senha) {
 		/*Inserir validações */
-		int id = 1; /*INSERIR LOGICA DO ID AQUI*/
-		Usuario user = new Usuario(id, nome,cpf,cnpj,email);
 		
 		try{
+			int id = usuarioDao.getNextId();
+			Usuario user = new Usuario(id, nome,cpf,cnpj,email,senha);
 			boolean ok = usuarioDao.insertUser(user);
 			if(ok){
 				/*INSERIR aviso aos listeners, se implementarmos isso*/

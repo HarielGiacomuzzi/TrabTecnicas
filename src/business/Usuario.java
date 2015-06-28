@@ -7,14 +7,16 @@ public class Usuario {
 	private String cpf;
 	private String CNPJ;
 	private String email;
+	private String senha;
 
 	public Usuario(int id2, String nome2, String cpf2, String cnpj2,
-			String email2) {
+			String email2,String senha) {
 		this.nome = nome2;
 		this.cpf = cpf2;
 		this.CNPJ = cnpj2;
 		this.id = id2;
 		this.email = email2;
+		this.senha = senha;
 	}
 	public int getId() {
 		return id;
@@ -45,6 +47,10 @@ public class Usuario {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public String getSenha(){
+		return senha;
 	}
 
 	

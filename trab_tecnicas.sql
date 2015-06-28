@@ -4,6 +4,7 @@ create table usuarios(
   cpf varchar(15),
   cnpj varchar(20),
   email varchar2(20),
+  senha varchar2(20),
   
   primary key(id_usuario),
   constraint check_cpf_cnpj check(cpf != null OR cnpj != null) 

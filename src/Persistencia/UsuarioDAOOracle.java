@@ -52,7 +52,8 @@ public class UsuarioDAOOracle implements UsuarioDAO {
                 String cpf = resultado.getString("CPF");
                 String cnpj = resultado.getString("CNPJ");
                 String email = resultado.getString("EMAIL");
-                u = new Usuario(id, nome,cpf,cnpj,email);
+                String senha = resultado.getString("SENHA");
+                u = new Usuario(id, nome,cpf,cnpj,email,senha);
             }
             sta.close();
             con.close();
@@ -79,7 +80,8 @@ public class UsuarioDAOOracle implements UsuarioDAO {
                 String cpf = resultado.getString("CPF");
                 String cnpj = resultado.getString("CNPJ");
                 String email = resultado.getString("EMAIL");
-                u = new Usuario(id, name,cpf,cnpj,email);
+                String senha = resultado.getString("SENHA");
+                u = new Usuario(id, name,cpf,cnpj,email,senha);
             }
             sta.close();
             con.close();
@@ -99,12 +101,13 @@ public class UsuarioDAOOracle implements UsuarioDAO {
 	public boolean insertUser(Usuario user) throws UsuarioDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO usuarios (nome, email, cpf, cnpj, id) VALUES (?,?,?,?,?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO usuarios (nome, email, cpf, cnpj, id_usuario,senha) VALUES (?,?,?,?,?,?)");
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getCpf());
             stmt.setString(4, user.getCNPJ());
             stmt.setInt(5, user.getId());
+            stmt.setString(6,user.getSenha());
             int ret = stmt.executeUpdate();
             con.close();
             return (ret>0);
