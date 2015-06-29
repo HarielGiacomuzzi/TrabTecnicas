@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 
 import business.FachadaException;
 import business.LeilaoFachada;
+import javax.swing.JList;
 
 public class MainWindow {
 
@@ -51,11 +52,11 @@ public class MainWindow {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 374);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnNewButton_1 = new JButton("Cadastrar Leilões");
-		btnNewButton_1.setBounds(149, 215, 123, 23);
+		btnNewButton_1.setBounds(147, 264, 123, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//insert cadastro leilao aqui
@@ -65,7 +66,7 @@ public class MainWindow {
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Cadastrar Bens");
-		btnNewButton_2.setBounds(289, 215, 107, 23);
+		btnNewButton_2.setBounds(288, 302, 107, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//inser caadastro bens aqui
@@ -74,7 +75,7 @@ public class MainWindow {
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnVisualizarLeiles = new JButton("Visualizar Leilões");
-		btnVisualizarLeiles.setBounds(10, 215, 119, 23);
+		btnVisualizarLeiles.setBounds(10, 302, 119, 23);
 		btnVisualizarLeiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//insert ver leiloes aqui.f
@@ -87,7 +88,7 @@ public class MainWindow {
 		frame.getContentPane().add(lblLogadoComo);
 		
 		JLabel lblNomeUsuar = new JLabel("New label");
-		lblNomeUsuar.setBounds(119, 11, 46, 14);
+		lblNomeUsuar.setBounds(119, 11, 123, 14);
 		try {
 			lblNomeUsuar.setText(leilaoFachada.getNomeUsuarioLogado());
 		} catch (FachadaException e1) {
@@ -95,6 +96,14 @@ public class MainWindow {
 			JOptionPane.showMessageDialog(null, e1.getMessage());
 		}
 		frame.getContentPane().add(lblNomeUsuar);
+		
+		JList list = new JList();
+		list.setBounds(10, 53, 331, 200);
+		frame.getContentPane().add(list);
+		
+		JLabel lblLeiles = new JLabel("Leil\u00F5es");
+		lblLeiles.setBounds(10, 36, 46, 14);
+		frame.getContentPane().add(lblLeiles);
 		frame.setVisible(true);
 	}
 
