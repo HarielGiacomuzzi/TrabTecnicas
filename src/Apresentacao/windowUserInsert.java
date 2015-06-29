@@ -108,11 +108,13 @@ public class windowUserInsert extends JFrame {
 		btnInsertuser.setBounds(6, 273, 117, 29);
 		btnInsertuser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				boolean ok = controler.insertUsuario(textFieldNome.getText(), textFieldCPF.getText(), textFieldCNPJ.getText(), textFieldEmail.getText(), textFieldSenha.getText());
-				if(ok){
-					JOptionPane.showMessageDialog(null, "Usuario Cadastrado com Sucesso!");
+				if(textFieldNome.getText().isEmpty()){
+					JOptionPane.showMessageDialog(null, "Nome deve ser preenchido!");
 				} else{
-					JOptionPane.showMessageDialog(null, "Erro ao Cadastrar usuario.");
+					boolean ok = controler.insertUsuario(textFieldNome.getText(), textFieldCPF.getText(), textFieldCNPJ.getText(), textFieldEmail.getText(), textFieldSenha.getText());
+					if(ok){
+						JOptionPane.showMessageDialog(null, "Usuario Cadastrado com Sucesso!");
+					} 
 				}
 			}
 		});

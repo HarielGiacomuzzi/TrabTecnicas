@@ -25,7 +25,7 @@ public class LeilaoFachada {
 		return null;
 	}
 
-	public Usuario insertUsuario(String nome, String cpf, String cnpj, String email,String senha) {
+	public Usuario insertUsuario(String nome, String cpf, String cnpj, String email,String senha) throws FachadaException {
 		/*Inserir validações */
 		
 		try{
@@ -39,7 +39,7 @@ public class LeilaoFachada {
 			return null;
 		} catch(UsuarioDAOException e){
 			/*INSERIR throw de Exceção da camada de negócio*/
-			return null;
+			throw new FachadaException(e.getMessage());
 		}
 	}
 	

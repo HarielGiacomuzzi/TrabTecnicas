@@ -101,6 +101,14 @@ public class UsuarioDAOOracle implements UsuarioDAO {
 	public boolean insertUser(Usuario user) throws UsuarioDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
+            
+            PreparedStatement validaEmail = con.prepareStatement("SELECT * FROM usuarios WHERE email = ?");
+            validaEmail.setString(1,user.getEmail());
+            ResultSet resultado = validaEmail.executeQuery();
+            if(resultado.next()){
+            	throw new UsuarioDAOException("Email já cadastrado.");
+            }            
+            
             PreparedStatement stmt = con.prepareStatement("INSERT INTO usuarios (nome, email, cpf, cnpj, id_usuario,senha) VALUES (?,?,?,?,?,?)");
             stmt.setString(1, user.getNome());
             stmt.setString(2, user.getEmail());

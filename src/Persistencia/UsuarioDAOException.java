@@ -20,6 +20,6 @@ public class UsuarioDAOException extends Exception {
 	@Override
 	public String getMessage() {
 		// TODO Auto-generated method stub
-		return "Error Loading data from Usrs Table \n"+message;
+		return message;
 	}
 }
