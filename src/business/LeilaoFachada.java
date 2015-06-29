@@ -31,6 +31,15 @@ public class LeilaoFachada {
 		return leilao;
 	}
 	
+	public String getNomeUsuarioLogado() throws FachadaException{
+		try{
+		Usuario user = usuarioDao.getUserByID(IDUsuarioLogado);
+		return user.getNome();
+		} catch(UsuarioDAOException e){
+			throw new FachadaException(e.getMessage());
+		}
+	}
+	
 	public List<Usuario> getAllUsers() {
 		return null;
 	}

@@ -43,7 +43,7 @@ public class UsuarioDAOOracle implements UsuarioDAO {
 	public Usuario getUserByID(int id) throws UsuarioDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from usuarios where id = ?");
+            PreparedStatement sta = con.prepareStatement("select * from usuarios where id_usuario = ?");
             sta.setInt(1, id);
             ResultSet resultado = sta.executeQuery();
             Usuario u = null;
