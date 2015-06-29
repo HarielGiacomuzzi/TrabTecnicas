@@ -104,7 +104,7 @@ public class windowUserInsert extends JFrame {
 		textFieldSenha.setBounds(107, 216, 134, 28);
 		contentPane.add(textFieldSenha);
 		
-		JButton btnInsertuser = new JButton("InsertUser");
+		JButton btnInsertuser = new JButton("Cadastrar");
 		btnInsertuser.setBounds(6, 273, 117, 29);
 		btnInsertuser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

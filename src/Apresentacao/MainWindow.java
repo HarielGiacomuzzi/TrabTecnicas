@@ -75,6 +75,7 @@ public class MainWindow {
 			}
 		});
 		frame.getContentPane().add(btnVisualizarLeiles);
+		frame.setVisible(true);
 	}
 
 }

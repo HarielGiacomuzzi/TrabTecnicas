@@ -10,7 +10,7 @@ public class ControlerLeiloes {
 	LeilaoFachada leilaoFachada;
 	
 	public ControlerLeiloes(){
-		leilaoFachada = new LeilaoFachada();
+		leilaoFachada = LeilaoFachada.getInstance();
 	}
 	public List<Leilao> getLeiloes() {
 		return null;

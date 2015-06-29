@@ -13,5 +13,7 @@ public interface UsuarioDAO {
 	public abstract boolean removeUser(Usuario user) throws UsuarioDAOException;
 	
 	public int getNextId() throws UsuarioDAOException;
+	
+	public int validaLogin(String email, String senha) throws UsuarioDAOException; /*retorna o id do usuario se logado com sucesso, do contrário retorna 0. */
 
 }

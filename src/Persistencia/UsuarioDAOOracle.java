@@ -141,5 +141,21 @@ public class UsuarioDAOOracle implements UsuarioDAO {
             throw new UsuarioDAOException("Falha ao remover.", ex);
         }
 	}
+	
+	public int validaLogin(String email, String senha) throws UsuarioDAOException{
+		try{
+			Connection con = new OracleJDBC().getConnection();
+			PreparedStatement stmt = con.prepareStatement("SELECT ID_USUARIO FROM USUARIOS WHERE Email = ? and SENHA = ?");
+			stmt.setString(1, email);
+			stmt.setString(2, senha);
+			ResultSet resultado = stmt.executeQuery();
+			if(resultado.next()){
+				return resultado.getInt("ID_USUARIO");
+			}
+			return 0;
+		} catch(SQLException ex){
+			throw new UsuarioDAOException("Falha ao validar login",ex);
+		}
+	}
 
 }

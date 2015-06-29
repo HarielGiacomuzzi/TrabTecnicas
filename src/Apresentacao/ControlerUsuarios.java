@@ -12,7 +12,7 @@ public class ControlerUsuarios {
 	LeilaoFachada leilao;
 	
 	public ControlerUsuarios(){
-		leilao = new LeilaoFachada();
+		leilao = LeilaoFachada.getInstance();
 	}
 
 	public List<Usuario> getUsuarios() {
@@ -27,6 +27,15 @@ public class ControlerUsuarios {
 		}
 		return false;
 		} catch (FachadaException e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+			return false;
+		}
+	}
+	
+	public boolean efetuaLogin(String email, String senha){
+		try {
+			return leilao.efetuaLogin(email, senha);
+		} catch (FachadaException e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 			return false;
 		}

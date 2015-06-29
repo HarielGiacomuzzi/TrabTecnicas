@@ -2,6 +2,7 @@ package Apresentacao;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -16,9 +17,10 @@ import java.awt.event.ActionEvent;
 
 public class WindowLogin extends JFrame {
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldEmail;
 	private JLabel lblSenha;
-	private JTextField textField_1;
+	private JTextField textFieldSenha;
+	private ControlerUsuarios controler;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,6 +36,7 @@ public class WindowLogin extends JFrame {
 	}
 	
 	public WindowLogin() {
+		controler = new ControlerUsuarios();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 397, 269);
@@ -51,22 +54,34 @@ public class WindowLogin extends JFrame {
 		lblLogin.setBounds(176, 11, 46, 28);
 		contentPane.add(lblLogin);
 		
-		textField = new JTextField();
-		textField.setBounds(93, 63, 207, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		textFieldEmail = new JTextField();
+		textFieldEmail.setBounds(93, 63, 207, 20);
+		contentPane.add(textFieldEmail);
+		textFieldEmail.setColumns(10);
 		
 		lblSenha = new JLabel("Senha:");
 		lblSenha.setBounds(10, 114, 46, 14);
 		contentPane.add(lblSenha);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(93, 111, 207, 20);
-		contentPane.add(textField_1);
+		textFieldSenha = new JTextField();
+		textFieldSenha.setColumns(10);
+		textFieldSenha.setBounds(93, 111, 207, 20);
+		contentPane.add(textFieldSenha);
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.setBounds(131, 144, 125, 23);
+		btnEntrar.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				boolean ok = controler.efetuaLogin(textFieldEmail.getText(), textFieldSenha.getText());
+				if(ok){
+					JOptionPane.showMessageDialog(null, "Login bem sucedido!");
+					WindowLogin.this.dispose();
+					new MainWindow();
+				} else{
+					JOptionPane.showMessageDialog(null, "Login inválido!");
+				}
+			}
+		});
 		contentPane.add(btnEntrar);
 		
 		JButton btnNovoUsurio = new JButton("Novo Usuário");

@@ -11,14 +11,24 @@ import Persistencia.UsuarioDAOException;
 import Persistencia.UsuarioDAOOracle;
 
 public class LeilaoFachada {
-	UsuarioDAO usuarioDao;
-	LeilaoDAO leilaoDao;
-	BemDAO bemDao;
+	static LeilaoFachada leilao;
+	private UsuarioDAO usuarioDao;
+	private LeilaoDAO leilaoDao;
+	private BemDAO bemDao;
+	private int IDUsuarioLogado;
 	
-	public LeilaoFachada(){
+	
+	private LeilaoFachada(){
 		usuarioDao = UsuarioDAOOracle.getInstance();
 		leilaoDao = LeilaoDAOOracle.getInstance();
 		bemDao = BemDAOOracle.getInstance();
+	}
+	
+	public static LeilaoFachada getInstance(){
+		if(leilao == null){
+			leilao = new LeilaoFachada();
+		}
+		return leilao;
 	}
 	
 	public List<Usuario> getAllUsers() {
@@ -76,6 +86,18 @@ public class LeilaoFachada {
 			return null;
 		}
 		
+	}
+	
+	public boolean efetuaLogin(String email, String senha) throws FachadaException{
+		try{
+			int id = usuarioDao.validaLogin(email, senha);
+			if(id==0)return false;
+			IDUsuarioLogado = id;
+			return true;
+			
+		} catch(UsuarioDAOException e){
+			throw new FachadaException(e.getMessage());
+		}
 	}
 	
 	
