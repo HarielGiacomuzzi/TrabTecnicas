@@ -46,9 +46,11 @@ public class WindowLeilaoInsert extends JFrame {
 		lblNewLabel.setBounds(22, 44, 78, 16);
 		contentPane.add(lblNewLabel);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(161, 40, 52, 27);
-		contentPane.add(comboBox);
+		String[] tipos = {"Oferta","Demanda"};
+		
+		JComboBox comboBoxLeilao = new JComboBox(tipos);
+		comboBoxLeilao.setBounds(161, 40, 96, 27);
+		contentPane.add(comboBoxLeilao);
 		
 		JButton btnBack = new JButton("Back");
 		btnBack.setBounds(6, 6, 117, 29);
@@ -58,9 +60,11 @@ public class WindowLeilaoInsert extends JFrame {
 		lblTipoLance.setBounds(22, 91, 78, 16);
 		contentPane.add(lblTipoLance);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setBounds(161, 87, 52, 27);
-		contentPane.add(comboBox_1);
+		String[] lances = {"Aberto","Fechado"};
+		
+		JComboBox comboBoxLance = new JComboBox(lances);
+		comboBoxLance.setBounds(161, 87, 96, 27);
+		contentPane.add(comboBoxLance);
 		
 		JLabel lblDataInicio = new JLabel("Data Inicio");
 		lblDataInicio.setBounds(25, 141, 75, 16);
@@ -77,22 +81,6 @@ public class WindowLeilaoInsert extends JFrame {
 		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
 		formattedTextField_1.setBounds(161, 186, 68, 28);
 		contentPane.add(formattedTextField_1);
-		
-		JLabel lblPreo = new JLabel("Preço");
-		lblPreo.setBounds(21, 236, 61, 16);
-		contentPane.add(lblPreo);
-		
-		JFormattedTextField formattedTextField_2 = new JFormattedTextField();
-		formattedTextField_2.setBounds(161, 230, 68, 28);
-		contentPane.add(formattedTextField_2);
-		
-		JLabel lblVendedor = new JLabel("Vendedor");
-		lblVendedor.setBounds(267, 44, 61, 16);
-		contentPane.add(lblVendedor);
-		
-		JComboBox comboBox_2 = new JComboBox();
-		comboBox_2.setBounds(262, 72, 135, 27);
-		contentPane.add(comboBox_2);
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(327, 231, 117, 29);

@@ -17,11 +17,13 @@ import javax.swing.JLabel;
 import business.FachadaException;
 import business.LeilaoFachada;
 import javax.swing.JList;
+import javax.swing.JTable;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private LeilaoFachada leilaoFachada;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -59,7 +61,7 @@ public class MainWindow {
 		btnNewButton_1.setBounds(147, 264, 123, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//insert cadastro leilao aqui
+				new WindowLeilaoInsert().show();
 			}
 		});
 		frame.getContentPane().setLayout(null);
@@ -97,14 +99,13 @@ public class MainWindow {
 		}
 		frame.getContentPane().add(lblNomeUsuar);
 		
-		JList list = new JList();
-		list.setBounds(10, 53, 331, 200);
-		frame.getContentPane().add(list);
-		
 		JLabel lblLeiles = new JLabel("Leil\u00F5es");
 		lblLeiles.setBounds(10, 36, 46, 14);
 		frame.getContentPane().add(lblLeiles);
+		
+		table = new JTable();
+		table.setBounds(10, 61, 374, 192);
+		frame.getContentPane().add(table);
 		frame.setVisible(true);
 	}
-
 }
