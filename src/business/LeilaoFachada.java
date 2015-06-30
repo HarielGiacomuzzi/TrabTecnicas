@@ -1,8 +1,10 @@
 package business;
 
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
+import business.Bem;
 import Persistencia.BemDAOException;
 import Persistencia.BemDAOOracle;
 import Persistencia.CategoriaDAOException;
@@ -130,10 +132,10 @@ public class LeilaoFachada {
 		}
 	}
 	
-	public Bem insertBem(int idLeilao, String descBreve, String descCompleta, String string){
+	public Bem insertBem(int idLeilao, String descBreve, String descCompleta, String string, double valor){
 		try{
 		int id = bemDao.getNextId();
-		Bem bem = new Bem(id, idLeilao, descBreve, descCompleta, string);
+		Bem bem = new Bem(id, idLeilao, descBreve, descCompleta, string,valor);
 		boolean ok = bemDao.insertBem(bem);
 		
 		if(ok){
@@ -157,6 +159,16 @@ public class LeilaoFachada {
 		} catch(UsuarioDAOException e){
 			throw new FachadaException(e.getMessage());
 		}
+	}
+
+	public LinkedList<Bem> getBens(int i) {
+		try {
+			return (LinkedList<Bem>) bemDao.getAllBensByID(i);
+		} catch (BemDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	

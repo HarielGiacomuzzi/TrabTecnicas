@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
 import business.Bem;
 import business.BemDAO;
@@ -26,7 +28,7 @@ public class BemDAOOracle implements BemDAO {
 	public Bem getBemByID(int id) throws BemDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from bens where id_bem = ?");
+            PreparedStatement sta = con.prepareStatement("select * from bens where leilao_fk = ?");
             sta.setInt(1, id);
             ResultSet resultado = sta.executeQuery();
             Bem b = null;
@@ -35,12 +37,37 @@ public class BemDAOOracle implements BemDAO {
                 String descBreve = resultado.getString("desc_Breve");
                 String descCompleta = resultado.getString("desc_Completa");
                 String idCategoria = resultado.getString("categoria_fk");
+                Double valor = resultado.getDouble("valor");
                 int idLeilao = resultado.getInt("leilao_fk");
-                b = new Bem(id1,idLeilao, descBreve, descCompleta, idCategoria);
+                b = new Bem(id1,idLeilao, descBreve, descCompleta, idCategoria,valor);
             }
             sta.close();
             con.close();
             return b;
+        } catch (SQLException ex) {
+            throw new BemDAOException(ex.getMessage());
+        }
+	}
+	
+	public List<Bem> getAllBensByID(int id) throws BemDAOException {
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement sta = con.prepareStatement("select * from bens where leilao_fk = ?");
+            sta.setInt(1, id);
+            ResultSet resultado = sta.executeQuery();
+            LinkedList<Bem> lst = new LinkedList<Bem>();
+            while(resultado.next()) {
+                int id1 = resultado.getInt("id_bem");
+                String descBreve = resultado.getString("desc_Breve");
+                String descCompleta = resultado.getString("desc_Completa");
+                String idCategoria = resultado.getString("categoria_fk");
+                int idLeilao = resultado.getInt("leilao_fk");
+                Double valor = resultado.getDouble("valor");
+                lst.add(new Bem(id1,idLeilao, descBreve, descCompleta, idCategoria,valor));
+            }
+            sta.close();
+            con.close();
+            return lst;
         } catch (SQLException ex) {
             throw new BemDAOException(ex.getMessage());
         }
@@ -72,12 +99,13 @@ public class BemDAOOracle implements BemDAO {
 	public boolean insertBem(Bem bem) throws BemDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO bens (id_bem, Categoria_fk, desc_Breve, desc_Completa , leilao_fk) VALUES (?,?,?,?,?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO bens (id_bem, Categoria_fk, desc_Breve, desc_Completa , leilao_fk,valor) VALUES (?,?,?,?,?,?)");
             stmt.setInt(1, bem.getId());
             stmt.setString(2, bem.getIdCategoria());
             stmt.setString(3, bem.getDescBreve());
             stmt.setString(4, bem.getDescCompleta());
-            stmt.setInt(4, bem.getIdLeilao());
+            stmt.setInt(5, bem.getIdLeilao());
+            stmt.setDouble(6, bem.getValor());
             int ret = stmt.executeUpdate();
             con.close();
             return (ret>0);

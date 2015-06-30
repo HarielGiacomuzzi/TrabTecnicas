@@ -25,8 +25,9 @@ public class ControlerBens {
 	}
 
 
-	public boolean insertBem(int idLeilao, String descBreve, String descCompleta, String string) {
-		Bem bem = leilaoFachada.insertBem(idLeilao, descBreve, descCompleta, string);
+	public boolean insertBem(int idLeilao, String descBreve, String descCompleta, String string, double valor) {
+		leilaoFachada = LeilaoFachada.getInstance();
+		Bem bem = leilaoFachada.insertBem(idLeilao, descBreve, descCompleta, string, valor);
 		if(bem!=null){
 			return true;
 		}
@@ -45,22 +46,6 @@ public class ControlerBens {
 	public void previousWindow(JFrame backTo) {
 		this.frame.setVisible(false);
 		backTo.setVisible(true);
-	}
-
-
-	public void prepareContentOfCategorias() {
-		try {
-			LinkedList<Categoria> lst = (LinkedList<Categoria>) leilaoFachada.getCategorias();
-			categorias = new String[lst.size()];
-			Categoria aux[] = (Categoria[])lst.toArray();
-			for(int i = 0; i < lst.size(); i++){
-				categorias[i] = aux[i].getDescCategoria();
-			}
-			
-		} catch (FachadaException e) {
-			e.printStackTrace();
-		}
-		
 	}
 
 }

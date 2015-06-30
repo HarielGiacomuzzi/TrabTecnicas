@@ -2,11 +2,16 @@ package Apresentacao;
 
 import business.LeilaoFachada;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Date;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
+import javax.swing.ListModel;
 import javax.swing.table.*;
+
+import business.Bem;
 import business.Leilao;
 import business.Usuario;
 
@@ -14,6 +19,7 @@ public class ControlerLeiloes {
 	LeilaoFachada leilaoFachada;
 	JFrame frame;
 	private DefaultTableModel modelo;
+	Double total;
 	
 	public ControlerLeiloes(){
 		leilaoFachada = LeilaoFachada.getInstance();
@@ -64,6 +70,26 @@ public class ControlerLeiloes {
 			return true;
 		}
 		return false;
+	}
+	public void insertBem(int i) {
+			WindowBemInsert insertBem = new WindowBemInsert();
+			insertBem.setIdLeilao(i);
+			insertBem.setBack(frame);
+			insertBem.setVisible(true);
+			frame.setVisible(false);
+	}
+	public ListModel getListBens(int i) {
+		leilaoFachada = LeilaoFachada.getInstance();
+		total = 0.0;
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		LinkedList<Bem> lst = leilaoFachada.getBens(i);
+		if (lst != null){
+			for(Bem b : lst){
+					model.addElement(b.getDescBreve());
+					total += b.getValor();
+			}
+		}
+		return model;
 	}
 
 }

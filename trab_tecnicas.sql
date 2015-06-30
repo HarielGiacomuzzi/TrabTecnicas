@@ -19,12 +19,13 @@ create table categorias(
 
 create table bens(
   id_bem int not null,
-  categoria_fk int,
+  categoria_fk varchar(30),
   desc_breve varchar(30),
   desc_completa varchar2(30),
+  leilao_fk int
   
   PRIMARY KEY (id_bem),
-  FOREIGN KEY (categoria_fk) references categorias(id_categoria)
+  FOREIGN KEY (leilao_fk) references leilao(id_leilao)
 );
 
 create table leilao(

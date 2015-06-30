@@ -1,5 +1,7 @@
 package business;
 
+import java.util.List;
+
 import Persistencia.BemDAOException;
 
 public interface BemDAO {
@@ -11,5 +13,7 @@ public interface BemDAO {
 	public abstract boolean removeBem(Bem bem) throws BemDAOException;
 	
 	public int getNextId() throws BemDAOException;
+	
+	public abstract List<Bem> getAllBensByID(int id) throws BemDAOException;
 
 }

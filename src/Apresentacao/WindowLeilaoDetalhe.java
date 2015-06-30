@@ -8,6 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+
+import oracle.jrockit.jfr.JITracer;
 import business.Leilao;
 import business.LeilaoFachada;
 import business.FachadaException;
@@ -45,6 +47,7 @@ public class WindowLeilaoDetalhe extends JFrame {
 			getContentPane().add(labelNomeUsuario);
 			
 			JList listBens = new JList();
+			listBens.setModel(controler.getListBens(leilao.getId()));
 			listBens.setBounds(10, 94, 200, 215);
 			getContentPane().add(listBens);
 			
@@ -52,7 +55,7 @@ public class WindowLeilaoDetalhe extends JFrame {
 			lblBens.setBounds(10, 69, 46, 14);
 			getContentPane().add(lblBens);
 			
-			JLabel lblNewLabel_1 = new JLabel("Valor total:");
+			JLabel lblNewLabel_1 = new JLabel(controler.total.toString());
 			lblNewLabel_1.setBounds(10, 365, 87, 14);
 			getContentPane().add(lblNewLabel_1);
 			
@@ -116,6 +119,11 @@ public class WindowLeilaoDetalhe extends JFrame {
 			getContentPane().add(lblStatusAtual);
 			
 			JButton btnAddBem = new JButton("Adicionar Bem");
+			btnAddBem.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					controler.insertBem(leilao.getId());
+				}
+			});
 			btnAddBem.setBounds(10, 320, 139, 23);
 			getContentPane().add(btnAddBem);
 			

@@ -3,12 +3,13 @@ package business;
 public class Bem {
 
 	public Bem(int id1, int idLeilao, String descBreve2, String descCompleta2,
-			String string) {
+			String string, double valor) {
 		this.id = id1;
 		this.descBreve = descBreve2;
 		this.descCompleta = descCompleta2;
 		this.idCategoria = string;
 		this.idLeilao = idLeilao;
+		this.valor = valor;
 	}
 	
 	public int getId() {
@@ -56,5 +57,11 @@ public class Bem {
 	private String idCategoria;
 	
 	private int idLeilao;
+
+	private double valor;
+	
+	public Double getValor() {
+		return this.valor;
+	}
 
 }
