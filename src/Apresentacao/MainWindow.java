@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 import java.awt.FlowLayout;
 
@@ -16,15 +17,12 @@ import javax.swing.JLabel;
 
 import business.FachadaException;
 import business.LeilaoFachada;
-import javax.swing.JList;
-import javax.swing.JTable;
 
 public class MainWindow {
 
 	private JFrame frame;
 	private LeilaoFachada leilaoFachada;
-	private JTable table;
-
+	private ControlerPrincipal controler;
 	/**
 	 * Launch the application.
 	 */
@@ -47,12 +45,14 @@ public class MainWindow {
 	public MainWindow() {
 		leilaoFachada = LeilaoFachada.getInstance();
 		initialize();
+		controler = new ControlerPrincipal(this.frame);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 374);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,26 +61,26 @@ public class MainWindow {
 		btnNewButton_1.setBounds(147, 264, 123, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new WindowLeilaoInsert().show();
+				controler.InsertLeilao();
 			}
 		});
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Cadastrar Bens");
-		btnNewButton_2.setBounds(288, 302, 107, 23);
+		btnNewButton_2.setBounds(289, 215, 107, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//inser caadastro bens aqui
+				controler.insertBens();
 			}
 		});
 		frame.getContentPane().add(btnNewButton_2);
 		
 		JButton btnVisualizarLeiles = new JButton("Visualizar Leilões");
-		btnVisualizarLeiles.setBounds(10, 302, 119, 23);
+		btnVisualizarLeiles.setBounds(10, 215, 119, 23);
 		btnVisualizarLeiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//insert ver leiloes aqui.f
+				controler.ViewLeilao();
 			}
 		});
 		frame.getContentPane().add(btnVisualizarLeiles);
@@ -103,9 +103,10 @@ public class MainWindow {
 		lblLeiles.setBounds(10, 36, 46, 14);
 		frame.getContentPane().add(lblLeiles);
 		
-		table = new JTable();
-		table.setBounds(10, 61, 374, 192);
+		JTable table = new JTable();
+		table.setBounds(10, 61, 374, 142);
 		frame.getContentPane().add(table);
 		frame.setVisible(true);
 	}
+
 }

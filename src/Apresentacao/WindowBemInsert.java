@@ -11,10 +11,14 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WindowBemInsert extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame backTo;
+	private ControlerBens controler;
 	private JTextField textField;
 	private JTextField textField_1;
 
@@ -38,6 +42,8 @@ public class WindowBemInsert extends JFrame {
 	 * Create the frame.
 	 */
 	public WindowBemInsert() {
+		this.controler = new ControlerBens(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -46,6 +52,11 @@ public class WindowBemInsert extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controler.previousWindow(backTo);
+			}
+		});
 		btnBack.setBounds(6, 6, 117, 29);
 		contentPane.add(btnBack);
 		
@@ -78,5 +89,9 @@ public class WindowBemInsert extends JFrame {
 		btnInsert.setBounds(6, 223, 117, 29);
 		contentPane.add(btnInsert);
 		
+	}
+
+	public void setBack(JFrame frame) {
+		this.backTo = frame;
 	}
 }

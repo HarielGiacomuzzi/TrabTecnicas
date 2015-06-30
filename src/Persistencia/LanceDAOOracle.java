@@ -24,16 +24,16 @@ public class LanceDAOOracle implements LanceDAO {
 	public Lance getLanceByID(int id) throws LanceDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from lances where id = ?");
+            PreparedStatement sta = con.prepareStatement("select * from lances where id_lance = ?");
             sta.setInt(1, id);
             ResultSet resultado = sta.executeQuery();
             Lance l = null;
             if(resultado.next()) {
-                int id2 = resultado.getInt("id");
-                Date data = resultado.getDate("data");
-                double valor = resultado.getDouble("valor");
-                int idleilao = resultado.getInt("idLeilao");
-                int idUser = resultado.getInt("idUser");
+                int id2 = resultado.getInt("id_lance");
+                Date data = resultado.getDate("data_lance");
+                double valor = resultado.getDouble("valor_lance");
+                int idleilao = resultado.getInt("lailao_fk");
+                int idUser = resultado.getInt("usuario_fk");
                 l = new Lance(id2, data,valor,idleilao,idUser);
             }
             sta.close();
@@ -69,17 +69,17 @@ public class LanceDAOOracle implements LanceDAO {
 	public List<Lance> getLanceByLeilao(Leilao leilao) throws LanceDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from lances where idLeilao = ?");
+            PreparedStatement sta = con.prepareStatement("select * from lances where leilao_fk = ?");
             sta.setInt(1, leilao.getId());
             List<Lance> aux = new LinkedList<Lance>(null);
             ResultSet resultado = sta.executeQuery();
             Lance l = null;
             while(resultado.next()) {
-                int id2 = resultado.getInt("id");
-                Date data = resultado.getDate("data");
-                double valor = resultado.getDouble("valor");
-                int idleilao = resultado.getInt("idLeilao");
-                int idUser = resultado.getInt("idUser");
+                int id2 = resultado.getInt("id_lance");
+                Date data = resultado.getDate("data_lance");
+                double valor = resultado.getDouble("valor_lance");
+                int idleilao = resultado.getInt("Leilao_fk");
+                int idUser = resultado.getInt("usuario_fk");
                 l = new Lance(id2, data,valor,idleilao,idUser);
                 aux.add(l);
             }
@@ -99,7 +99,7 @@ public class LanceDAOOracle implements LanceDAO {
 	public boolean insertLance(Lance lance) throws LanceDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO lances (id, data, valor, idLeilao, idUsuario) VALUES (?,?,?,?,?)");  
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO lances (id_lance, data_lance, valor_lance, leilao_fk, usuario_fk) VALUES (?,?,?,?,?)");  
             stmt.setInt(1, lance.getId());
             stmt.setDate(2, (java.sql.Date) lance.getData());
             stmt.setDouble(3, lance.getValor());
@@ -121,7 +121,7 @@ public class LanceDAOOracle implements LanceDAO {
 	public boolean removeLance(Lance lance) throws LanceDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("delete from lances where id = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from lances where id_lance = ?");
             stmt.setInt(1, lance.getId());
             int ret = stmt.executeUpdate();
             con.close();

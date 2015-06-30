@@ -18,13 +18,13 @@ public class CategoriaDAOOracle implements CategoriaDAO {
 	public Categoria getCategoriaByID(int id) throws CategoriaDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from categorias where id = ?");
+            PreparedStatement sta = con.prepareStatement("select * from categorias where id_categoria = ?");
             sta.setInt(1, id);
             ResultSet resultado = sta.executeQuery();
             Categoria c = null;
             if(resultado.next()) {
-                int id2 = resultado.getInt("id");
-                String desc = resultado.getString("descCategoria");
+                int id2 = resultado.getInt("id_categoria");
+                String desc = resultado.getString("desc_Categoria");
                 c = new Categoria(id2, desc);
             }
             sta.close();
@@ -57,7 +57,7 @@ public class CategoriaDAOOracle implements CategoriaDAO {
 	public boolean insertCategoria(Categoria cat) throws CategoriaDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO categorias (id, descCategoria) VALUES (?,?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO categorias (id_categoria, desc_Categoria) VALUES (?,?)");
             stmt.setInt(1, cat.getId());
             stmt.setString(2, cat.getDescCategoria());
             int ret = stmt.executeUpdate();
@@ -73,7 +73,7 @@ public class CategoriaDAOOracle implements CategoriaDAO {
 	public boolean removeCategoria(Categoria cat) throws CategoriaDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("delete from categorias where id = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from categorias where id_categoria = ?");
             stmt.setInt(1, cat.getId());
             int ret = stmt.executeUpdate();
             con.close();

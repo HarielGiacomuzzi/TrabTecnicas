@@ -20,10 +20,10 @@ public class Leilao {
 
 	private double preco;
 	
-	public Leilao(int id, String tipoLeilao, String tipoLance, Date dataInicio, Date dataFim, int idVendedor, double preco) {
+	public Leilao(int id, char tipoLeilao2, char tipoLance2, Date dataInicio, Date dataFim, int idVendedor, double preco) {
 		this.id = id;
-		this.tipoLeilao = tipoLeilao;
-		this.tipoLance = tipoLance;
+		this.tipoLeilao = tipoLeilao2+"";
+		this.tipoLance = tipoLance2+"";
 		this.dataInicio = dataInicio;
 		this.dataFim = dataFim;
 		this.idVendedor = idVendedor;
@@ -31,6 +31,18 @@ public class Leilao {
 	}
 	
 	
+	public Leilao(int id2, String tipoLeilao2, String tipoLance2, Date inicio,
+			Date fim, int vendedorID, double preco2) {
+		this.id = id2;
+		this.tipoLeilao = tipoLeilao2+"";
+		this.tipoLance = tipoLance2+"";
+		this.dataInicio = inicio;
+		this.dataFim = fim;
+		this.idVendedor = vendedorID;
+		this.preco = preco2;
+	}
+
+
 	public ArrayList<Lance> getLances() {
 		return lances;
 	}

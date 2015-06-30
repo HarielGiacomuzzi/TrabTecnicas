@@ -26,14 +26,14 @@ public class LeilaoDAOOracle implements LeilaoDAO {
 	public Leilao getLeilaoByID(int id) throws LeilaoDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement sta = con.prepareStatement("select * from leilao where id = ?");
+            PreparedStatement sta = con.prepareStatement("select * from leilao where id_leilao = ?");
             sta.setInt(1, id);
             ResultSet resultado = sta.executeQuery();
             Leilao l = null;
             if(resultado.next()) {
                 int id2 = resultado.getInt("id_leilao");
-                String tipoLeilao = resultado.getString("tipo_leilao");
-                String tipoLance = resultado.getString("tipo_lance");
+                char tipoLeilao = resultado.getString("tipo_leilao").charAt(0);
+                char tipoLance = resultado.getString("tipo_lance").charAt(0);
                 Date dataInicio = resultado.getDate("data_inicio");
                 Date dataFim = resultado.getDate("data_fim");
                 int idVendedor = resultado.getInt("vendedor_fk");
@@ -99,7 +99,7 @@ public class LeilaoDAOOracle implements LeilaoDAO {
 	public boolean removeLeilao(Leilao leilao) throws LeilaoDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("delete from leilao where id = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from leilao where id_leilao = ?");
             stmt.setInt(1, leilao.getId());
             int ret = stmt.executeUpdate();
             con.close();

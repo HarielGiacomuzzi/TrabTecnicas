@@ -9,11 +9,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class WindowLeilaoView extends JFrame {
 
 	private JPanel contentPane;
-
+	private ControlerLeiloes controler;
+	private JFrame backTo;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -34,6 +38,8 @@ public class WindowLeilaoView extends JFrame {
 	 * Create the frame.
 	 */
 	public WindowLeilaoView() {
+		this.controler = new ControlerLeiloes(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,6 +48,11 @@ public class WindowLeilaoView extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controler.backToPrevious(backTo);
+			}
+		});
 		btnBack.setBounds(6, 6, 117, 29);
 		contentPane.add(btnBack);
 		
@@ -56,6 +67,11 @@ public class WindowLeilaoView extends JFrame {
 		JButton btnInserirLance = new JButton("Inserir Lance");
 		btnInserirLance.setBounds(6, 96, 117, 29);
 		contentPane.add(btnInserirLance);
+	}
+
+	public void setBack(JFrame frame) {
+		this.backTo = frame;
+		
 	}
 
 }

@@ -10,20 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
-import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.*;
-import java.text.SimpleDateFormat;
 
 public class WindowLeilaoInsert extends JFrame {
 
 	private JPanel contentPane;
+	private JFrame backTo;
 	private ControlerLeiloes controler;
-	JComboBox comboBoxLance;
-	JComboBox comboBoxLeilao;
-	private JFormattedTextField formattedTextFieldDataFim;
-	private JFormattedTextField formattedTextFieldDataIni;
+
 	/**
 	 * Launch the application.
 	 */
@@ -42,10 +37,16 @@ public class WindowLeilaoInsert extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @return 
 	 */
+	
+	public void setBack(JFrame backFrame){
+		this.backTo = backFrame;
+	}
+	
 	public WindowLeilaoInsert() {
-		controler = new ControlerLeiloes();
-		setTitle("Cadastro de Leilão");
+		this.controler = new ControlerLeiloes(this);
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -59,11 +60,16 @@ public class WindowLeilaoInsert extends JFrame {
 		
 		String[] tipos = {"Oferta","Demanda"};
 		
-		comboBoxLeilao = new JComboBox(tipos);
+		JComboBox comboBoxLeilao = new JComboBox(tipos);
 		comboBoxLeilao.setBounds(161, 40, 96, 27);
 		contentPane.add(comboBoxLeilao);
 		
 		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controler.backToPrevious(backTo);
+			}
+		});
 		btnBack.setBounds(6, 6, 117, 29);
 		contentPane.add(btnBack);
 		
@@ -73,7 +79,7 @@ public class WindowLeilaoInsert extends JFrame {
 		
 		String[] lances = {"Aberto","Fechado"};
 		
-		comboBoxLance = new JComboBox(lances);
+		JComboBox comboBoxLance = new JComboBox(lances);
 		comboBoxLance.setBounds(161, 87, 96, 27);
 		contentPane.add(comboBoxLance);
 		
@@ -81,44 +87,20 @@ public class WindowLeilaoInsert extends JFrame {
 		lblDataInicio.setBounds(25, 141, 75, 16);
 		contentPane.add(lblDataInicio);
 		
-		formattedTextFieldDataIni = new JFormattedTextField();
-		formattedTextFieldDataIni.setBounds(161, 135, 68, 28);
-		contentPane.add(formattedTextFieldDataIni);
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBounds(161, 135, 68, 28);
+		contentPane.add(formattedTextField);
 		
 		JLabel lblDataFim = new JLabel("Data Fim");
 		lblDataFim.setBounds(21, 192, 61, 16);
 		contentPane.add(lblDataFim);
 		
-		formattedTextFieldDataFim = new JFormattedTextField();
-		formattedTextFieldDataFim.setBounds(161, 186, 68, 28);
-		contentPane.add(formattedTextFieldDataFim);
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		formattedTextField_1.setBounds(161, 186, 68, 28);
+		contentPane.add(formattedTextField_1);
 		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.setBounds(327, 231, 117, 29);
-		btnInsert.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-				String dataIni = formattedTextFieldDataIni.getText();
-				String dataFim = formattedTextFieldDataFim.getText();
-				try{
-				Date dateIni;
-				Date dateFim;
-				
-					dateIni = formatter.parse(dataIni);
-					dateFim = formatter.parse(dataFim);
-				
-					
-				
-				
-				int id = controler.getIdUsuarioLogado();
-				boolean ok = controler.insertLeilao((String)comboBoxLeilao.getSelectedItem(), (String)comboBoxLance.getSelectedItem(), dateIni, dateFim, id, 0.0);
-				if(ok){
-					JOptionPane.showMessageDialog(null, "Leilao Cadastrado com Sucesso!");
-				}
-				} catch(Exception ex){
-				}
-			}
-		});
 		contentPane.add(btnInsert);
 	}
 }

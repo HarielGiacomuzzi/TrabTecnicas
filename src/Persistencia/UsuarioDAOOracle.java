@@ -106,7 +106,7 @@ public class UsuarioDAOOracle implements UsuarioDAO {
             validaEmail.setString(1,user.getEmail());
             ResultSet resultado = validaEmail.executeQuery();
             if(resultado.next()){
-            	throw new UsuarioDAOException("Email já cadastrado.");
+            	throw new UsuarioDAOException("Email jï¿½ cadastrado.");
             }            
             
             PreparedStatement stmt = con.prepareStatement("INSERT INTO usuarios (nome, email, cpf, cnpj, id_usuario,senha) VALUES (?,?,?,?,?,?)");
@@ -132,7 +132,7 @@ public class UsuarioDAOOracle implements UsuarioDAO {
 	public boolean removeUser(Usuario user) throws UsuarioDAOException {
 		try {
             Connection con = new OracleJDBC().getConnection();
-            PreparedStatement stmt = con.prepareStatement("delete from usuarios where id = ?");
+            PreparedStatement stmt = con.prepareStatement("delete from usuarios where id_usuario = ?");
             stmt.setInt(1, user.getId());
             int ret = stmt.executeUpdate();
             con.close();
