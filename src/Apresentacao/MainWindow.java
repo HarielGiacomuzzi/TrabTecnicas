@@ -51,6 +51,13 @@ public class MainWindow {
 		initialize();
 		controler = new ControlerPrincipal(this.frame);
 		
+	}	
+	
+	public void updateTable(){
+		DefaultTableModel modelo = controlerLeiloes.getUpdatedLeiloesTableModel();
+		
+		table.setModel(modelo);
+		table.repaint();
 	}
 
 	/**
@@ -62,11 +69,13 @@ public class MainWindow {
 		frame.setBounds(100, 100, 450, 374);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		final MainWindow main = this;
+		
 		JButton btnNewButton_1 = new JButton("Cadastrar Leilao");
 		btnNewButton_1.setBounds(234, 215, 150, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controler.InsertLeilao();
+				controler.InsertLeilao(main);
 			}
 		});
 		frame.getContentPane().setLayout(null);

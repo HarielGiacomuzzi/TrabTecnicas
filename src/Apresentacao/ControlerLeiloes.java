@@ -14,6 +14,7 @@ import javax.swing.table.*;
 import business.Bem;
 import business.Leilao;
 import business.Usuario;
+import Apresentacao.MainWindow;
 
 public class ControlerLeiloes {
 	LeilaoFachada leilaoFachada;
@@ -53,6 +54,30 @@ public class ControlerLeiloes {
 		
 		return modelo;
 	}
+	
+	public DefaultTableModel getUpdatedLeiloesTableModel(){
+		if (modelo.getRowCount() > 0) {
+	         for (int i = modelo.getRowCount() - 1; i > -1; i--) {
+	             modelo.removeRow(i);
+	         }
+	     }
+		List<Leilao> lista;		
+		try{
+		lista = leilaoFachada.getLeiloes();
+			for(Leilao l: lista){
+				String nome = leilaoFachada.getNomeByID(l.getIdVendedor());
+				String status = l.getStatus();
+				modelo.addRow(new Object[]{l.getId(),nome,status});
+			}
+			
+		} catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return modelo;
+	}
+	
+	
 
 	public void removeLeilao(int id) {
 
