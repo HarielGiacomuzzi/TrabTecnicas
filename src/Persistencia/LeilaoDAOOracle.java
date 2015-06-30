@@ -32,8 +32,8 @@ public class LeilaoDAOOracle implements LeilaoDAO {
             Leilao l = null;
             if(resultado.next()) {
                 int id2 = resultado.getInt("id_leilao");
-                char tipoLeilao = resultado.getString("tipo_leilao").charAt(0);
-                char tipoLance = resultado.getString("tipo_lance").charAt(0);
+                String tipoLeilao = resultado.getString("tipo_leilao");
+                String tipoLance = resultado.getString("tipo_lance");
                 Date dataInicio = resultado.getDate("data_inicio");
                 Date dataFim = resultado.getDate("data_fim");
                 int idVendedor = resultado.getInt("vendedor_fk");

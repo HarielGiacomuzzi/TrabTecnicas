@@ -15,9 +15,13 @@ public class ControlerLeiloes {
 	public List<Leilao> getLeiloes() {
 		return null;
 	}
+	
+	public int getIdUsuarioLogado(){
+		return leilaoFachada.getIDUsuarioLogado();
+	}
 
-	public boolean insertLeilao(char tipoLeilao, char tipoLance, Date inicio, Date fim, Usuario vendedor, double preco) {
-		Leilao leilao = leilaoFachada.insertLeilao(tipoLeilao,tipoLance,inicio,fim,vendedor,preco);
+	public boolean insertLeilao(String tipoLeilao, String tipoLance, Date inicio, Date fim, int vendedorID, double preco) {
+		Leilao leilao = leilaoFachada.insertLeilao(tipoLeilao,tipoLance,inicio,fim,vendedorID,preco);
 		if(leilao != null){
 			return true;
 		}

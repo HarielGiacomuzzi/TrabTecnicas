@@ -8,9 +8,9 @@ public class Leilao {
 
 	private int id;
 
-	private char tipoLeilao;
+	private String tipoLeilao;
 
-	private char tipoLance;
+	private String tipoLance;
 
 	private Date dataInicio;
 
@@ -20,7 +20,7 @@ public class Leilao {
 
 	private double preco;
 	
-	public Leilao(int id, char tipoLeilao, char tipoLance, Date dataInicio, Date dataFim, int idVendedor, double preco) {
+	public Leilao(int id, String tipoLeilao, String tipoLance, Date dataInicio, Date dataFim, int idVendedor, double preco) {
 		this.id = id;
 		this.tipoLeilao = tipoLeilao;
 		this.tipoLance = tipoLance;
@@ -47,19 +47,19 @@ public class Leilao {
 		this.id = id;
 	}
 
-	public char getTipoLeilao() {
+	public String getTipoLeilao() {
 		return tipoLeilao;
 	}
 
-	public void setTipoLeilao(char tipoLeilao) {
+	public void setTipoLeilao(String tipoLeilao) {
 		this.tipoLeilao = tipoLeilao;
 	}
 
-	public char getTipoLance() {
+	public String getTipoLance() {
 		return tipoLance;
 	}
 
-	public void setTipoLance(char tipoLance) {
+	public void setTipoLance(String tipoLance) {
 		this.tipoLance = tipoLance;
 	}
 

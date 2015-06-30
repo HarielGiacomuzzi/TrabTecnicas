@@ -40,6 +40,10 @@ public class LeilaoFachada {
 		}
 	}
 	
+	public int getIDUsuarioLogado(){
+		return IDUsuarioLogado;
+	}
+	
 	public List<Usuario> getAllUsers() {
 		return null;
 	}
@@ -62,9 +66,9 @@ public class LeilaoFachada {
 		}
 	}
 	
-	public Leilao insertLeilao(char tipoLeilao, char tipoLance, Date inicio, Date fim, Usuario vendedor, double preco){
+	public Leilao insertLeilao(String tipoLeilao, String tipoLance, Date inicio, Date fim, int vendedorID, double preco){
 		int id = 1; /*INSERIR LOGIDA DO ID*/
-		Leilao leilao = new Leilao(id,tipoLeilao,tipoLance,inicio,fim,vendedor.getId(),preco);
+		Leilao leilao = new Leilao(id,tipoLeilao,tipoLance,inicio,fim,vendedorID,preco);
 		
 		try{
 			boolean ok = leilaoDao.insertLeilao(leilao);
