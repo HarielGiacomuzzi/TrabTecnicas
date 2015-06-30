@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DateFormatter;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -15,6 +16,8 @@ import business.LeilaoFachada;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WindowLeilaoInsert extends JFrame {
@@ -88,11 +91,18 @@ public class WindowLeilaoInsert extends JFrame {
 		comboBoxLance.setBounds(161, 87, 96, 27);
 		contentPane.add(comboBoxLance);
 		
+		DateFormat format = new SimpleDateFormat("yyyy--MMMM--dd");
+		
 		JLabel lblDataInicio = new JLabel("Data Inicio");
 		lblDataInicio.setBounds(25, 141, 75, 16);
 		contentPane.add(lblDataInicio);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
+		JFormattedTextField formattedTextField = new JFormattedTextField(format);
+		formattedTextField.setValue(new Date());
+	    DateFormatter fmt = (DateFormatter) formattedTextField.getFormatter();
+	    fmt.setFormat(DateFormat.getDateInstance());
+	    //fmt.setFormat(new SimpleDateFormat("d/M/yyyy"));
+	    formattedTextField.setValue(formattedTextField.getValue());
 		formattedTextField.setBounds(161, 135, 68, 28);
 		contentPane.add(formattedTextField);
 		
@@ -100,7 +110,12 @@ public class WindowLeilaoInsert extends JFrame {
 		lblDataFim.setBounds(21, 192, 61, 16);
 		contentPane.add(lblDataFim);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField(format);
+		formattedTextField_1.setValue(new Date());
+	    DateFormatter fmt2 = (DateFormatter) formattedTextField_1.getFormatter();
+	    fmt2.setFormat(DateFormat.getDateInstance());
+	    //fmt2.setFormat(new SimpleDateFormat("d/M/yyyy"));
+	    formattedTextField_1.setValue(formattedTextField_1.getValue());
 		formattedTextField_1.setBounds(161, 186, 68, 28);
 		contentPane.add(formattedTextField_1);
 		
@@ -108,7 +123,21 @@ public class WindowLeilaoInsert extends JFrame {
 		btnInsert.addActionListener(new ActionListener() {
 			@SuppressWarnings({ "deprecation", "static-access" })
 			public void actionPerformed(ActionEvent e) {
-				controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),new Date(2015,06,30), new Date(2015,07,30), fachada.getInstance().getIDUsuarioLogado(), 0.0);
+//				System.out.println(formattedTextField.getValue().toString());
+//				String aux[] = formattedTextField.getValue().toString().split("/");
+//				int yearBegin = Integer.parseInt(aux[2]);
+//				int monthBegin = Integer.parseInt(aux[1]);
+//				int dayBegin = Integer.parseInt(aux[0]);
+//				
+//				String aux2[] = formattedTextField_1.getValue().toString().split("/");
+//				int yearEnd = Integer.parseInt(aux2[2]);
+//				int monthEnd = Integer.parseInt(aux2[1]);
+//				int dayEnd = Integer.parseInt(aux2[0]);
+				
+				Date a = new Date(Date.parse(formattedTextField.getValue().toString()));
+				Date b = new Date(Date.parse(formattedTextField_1.getValue().toString()));
+				
+				controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),a, b, fachada.getInstance().getIDUsuarioLogado(), 0.0);
 			}
 		});
 		btnInsert.setBounds(327, 231, 117, 29);
