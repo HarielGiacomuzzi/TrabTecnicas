@@ -105,7 +105,7 @@ public class BemDAOOracle implements BemDAO {
             stmt.setString(3, bem.getDescBreve());
             stmt.setString(4, bem.getDescCompleta());
             stmt.setInt(5, bem.getIdLeilao());
-            stmt.setDouble(6, bem.getValor());
+            stmt.setInt(6, bem.getValor().intValue());
             int ret = stmt.executeUpdate();
             con.close();
             return (ret>0);
