@@ -28,7 +28,10 @@ public class WindowLeilaoInsert extends JFrame {
 	private JFrame backTo;
 	private ControlerLeiloes controler;
 	private LeilaoFachada fachada;
-	
+	private JComboBox comboBoxLance;
+	private JComboBox comboBoxLeilao;
+	private JFormattedTextField formattedTextField;
+	private JFormattedTextField formattedTextField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -70,7 +73,7 @@ public class WindowLeilaoInsert extends JFrame {
 		
 		String[] tipos = {"Oferta","Demanda"};
 		
-		JComboBox comboBoxLeilao = new JComboBox(tipos);
+		comboBoxLeilao = new JComboBox(tipos);
 		comboBoxLeilao.setBounds(161, 40, 96, 27);
 		contentPane.add(comboBoxLeilao);
 		
@@ -89,7 +92,7 @@ public class WindowLeilaoInsert extends JFrame {
 		
 		String[] lances = {"Aberto","Fechado"};
 		
-		JComboBox comboBoxLance = new JComboBox(lances);
+		comboBoxLance = new JComboBox(lances);
 		comboBoxLance.setBounds(161, 87, 96, 27);
 		contentPane.add(comboBoxLance);
 		
@@ -99,7 +102,7 @@ public class WindowLeilaoInsert extends JFrame {
 		lblDataInicio.setBounds(25, 141, 75, 16);
 		contentPane.add(lblDataInicio);
 		
-		JFormattedTextField formattedTextField = new JFormattedTextField(format);
+		formattedTextField = new JFormattedTextField(format);
 		formattedTextField.setValue(new Date());
 	    DateFormatter fmt = (DateFormatter) formattedTextField.getFormatter();
 	    fmt.setFormat(new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH));
@@ -111,7 +114,7 @@ public class WindowLeilaoInsert extends JFrame {
 		lblDataFim.setBounds(21, 192, 61, 16);
 		contentPane.add(lblDataFim);
 		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField(format);
+		formattedTextField_1 = new JFormattedTextField(format);
 		formattedTextField_1.setValue(new Date());
 	    DateFormatter fmt2 = (DateFormatter) formattedTextField_1.getFormatter();
 	    fmt2.setFormat(new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH));
