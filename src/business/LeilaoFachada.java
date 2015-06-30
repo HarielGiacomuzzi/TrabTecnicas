@@ -40,6 +40,15 @@ public class LeilaoFachada {
 		}
 	}
 	
+	public Leilao getLeilaoByID(int idLeilao) throws FachadaException{
+		try{
+			return leilaoDao.getLeilaoByID(idLeilao);
+		}
+		catch(LeilaoDAOException ex){
+			throw new FachadaException(ex.getMessage());
+		}
+	}
+	
 	public String getNomeUsuarioLogado() throws FachadaException{
 		try{
 		Usuario user = usuarioDao.getUserByID(IDUsuarioLogado);

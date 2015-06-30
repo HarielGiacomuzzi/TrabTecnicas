@@ -34,7 +34,7 @@ public class ControlerPrincipal {
 	}
 	
 	public void ViewDetalheLeilao(int idLeilao){
-		WindowLeilaoDetalhe viewLeilao = new WindowLeilaoDetalhe(1);
+		WindowLeilaoDetalhe viewLeilao = new WindowLeilaoDetalhe(idLeilao);
 		viewLeilao.setBack(frame);
 		viewLeilao.setVisible(true);
 		frame.setVisible(false);
