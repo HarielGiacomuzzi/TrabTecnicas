@@ -6,22 +6,46 @@ import java.util.List;
 import java.util.Date;
 
 import javax.swing.JFrame;
-
+import javax.swing.table.*;
 import business.Leilao;
 import business.Usuario;
 
 public class ControlerLeiloes {
 	LeilaoFachada leilaoFachada;
 	JFrame frame;
+	private DefaultTableModel modelo;
 	
 	public ControlerLeiloes(){
 		leilaoFachada = LeilaoFachada.getInstance();
+		modelo = new DefaultTableModel();
+		
 	}
 	public ControlerLeiloes(JFrame windowLeilaoInsert) {
 		this.frame = windowLeilaoInsert;
 	}
 	public List<Leilao> getLeiloes() {
 		return null;
+	}
+	
+	public DefaultTableModel getLeiloesTableModel(){
+		modelo.addColumn("ID");
+		modelo.addColumn("Vendedor");
+		modelo.addColumn("Status");
+		List<Leilao> lista;
+		
+		try{
+		lista = leilaoFachada.getLeiloes();
+			for(Leilao l: lista){
+				String nome = leilaoFachada.getNomeByID(l.getIdVendedor());
+				String status = l.getStatus();
+				modelo.addRow(new Object[]{l.getId(),nome,status});
+			}
+			
+		} catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return modelo;
 	}
 
 	public void removeLeilao(int id) {

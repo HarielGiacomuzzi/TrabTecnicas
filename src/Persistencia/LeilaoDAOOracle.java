@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
 
 import business.Leilao;
 import business.LeilaoDAO;
@@ -17,6 +19,31 @@ public class LeilaoDAOOracle implements LeilaoDAO {
 			ref = new LeilaoDAOOracle();
 		}
 		return ref;
+	}
+	
+	public List<Leilao> getLeiloes() throws LeilaoDAOException{
+		List<Leilao> lista = new ArrayList<Leilao>();
+		try {
+            Connection con = new OracleJDBC().getConnection();
+            PreparedStatement sta = con.prepareStatement("select * from leilao");;
+            ResultSet resultado = sta.executeQuery();
+            while(resultado.next()) {
+                int id2 = resultado.getInt("id_leilao");
+                char tipoLeilao = resultado.getString("tipo_leilao").charAt(0);
+                char tipoLance = resultado.getString("tipo_lance").charAt(0);
+                Date dataInicio = resultado.getDate("data_inicio");
+                Date dataFim = resultado.getDate("data_fim");
+                int idVendedor = resultado.getInt("vendedor_fk");
+                double preco = resultado.getDouble("preco");
+                
+                lista.add(new Leilao(id2, tipoLeilao,tipoLance,dataInicio,dataFim,idVendedor,preco));
+            }
+            sta.close();
+            con.close();
+            return lista;
+        } catch (SQLException ex) {
+            throw new LeilaoDAOException(ex.getMessage());
+        }
 	}
 
 	/**

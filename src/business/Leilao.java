@@ -30,6 +30,13 @@ public class Leilao {
 		this.preco = preco;
 	}
 	
+	public String getStatus(){
+		Date hoje = new Date();
+		if(dataInicio.after(hoje) || dataFim.before(hoje) ){
+			return "Encerrado";
+		}
+		return "Em Andamento";
+	}
 	
 	public Leilao(int id2, String tipoLeilao2, String tipoLance2, Date inicio,
 			Date fim, int vendedorID, double preco2) {

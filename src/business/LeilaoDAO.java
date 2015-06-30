@@ -1,6 +1,7 @@
 package business;
 
 import Persistencia.LeilaoDAOException;
+import java.util.List;
 
 public interface LeilaoDAO {
 
@@ -11,5 +12,7 @@ public interface LeilaoDAO {
 	public abstract boolean removeLeilao(Leilao leilao) throws LeilaoDAOException;
 	
 	public abstract int getNextId() throws LeilaoDAOException;
+	
+	public abstract List<Leilao> getLeiloes() throws LeilaoDAOException;
 
 }

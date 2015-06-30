@@ -5,7 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-
+import javax.swing.table.*;
+import javax.swing.JScrollPane;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -23,6 +24,8 @@ public class MainWindow {
 	private JFrame frame;
 	private LeilaoFachada leilaoFachada;
 	private ControlerPrincipal controler;
+	private ControlerLeiloes controlerLeiloes;
+	private JTable table_1;
 	/**
 	 * Launch the application.
 	 */
@@ -44,8 +47,10 @@ public class MainWindow {
 	 */
 	public MainWindow() {
 		leilaoFachada = LeilaoFachada.getInstance();
+		controlerLeiloes = new ControlerLeiloes();
 		initialize();
 		controler = new ControlerPrincipal(this.frame);
+		
 	}
 
 	/**
@@ -103,10 +108,21 @@ public class MainWindow {
 		lblLeiles.setBounds(10, 36, 46, 14);
 		frame.getContentPane().add(lblLeiles);
 		
+		DefaultTableModel modelo = controlerLeiloes.getLeiloesTableModel();	
 		JTable table = new JTable();
+		table.setCellSelectionEnabled(true);
+		table.setFillsViewportHeight(true);
+		table.setModel(modelo);
 		table.setBounds(10, 61, 374, 142);
-		frame.getContentPane().add(table);
+		/*
+		JScrollPane scrollPane = new JScrollPane(table);
+		scrollPane.setBounds(375, 61, -353, 137);
+		frame.getContentPane().add(scrollPane);
+		*/
+		table_1 = new JTable();
+		table_1.setModel(modelo);
+		table_1.setBounds(34, 61, 329, 118);
+		frame.getContentPane().add(table_1);
 		frame.setVisible(true);
 	}
-
 }

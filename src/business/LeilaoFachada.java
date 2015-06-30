@@ -31,9 +31,27 @@ public class LeilaoFachada {
 		return leilao;
 	}
 	
+	public List<Leilao> getLeiloes() throws FachadaException{
+		try{
+		return leilaoDao.getLeiloes();
+		}
+		catch(LeilaoDAOException ex){
+			throw new FachadaException(ex.getMessage());
+		}
+	}
+	
 	public String getNomeUsuarioLogado() throws FachadaException{
 		try{
 		Usuario user = usuarioDao.getUserByID(IDUsuarioLogado);
+		return user.getNome();
+		} catch(UsuarioDAOException e){
+			throw new FachadaException(e.getMessage());
+		}
+	}
+	
+	public String getNomeByID(int id) throws FachadaException{
+		try{
+		Usuario user = usuarioDao.getUserByID(id);
 		return user.getNome();
 		} catch(UsuarioDAOException e){
 			throw new FachadaException(e.getMessage());
