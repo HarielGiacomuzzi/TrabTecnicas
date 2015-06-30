@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
 
 import business.LeilaoFachada;
 
@@ -143,8 +144,15 @@ public class WindowLeilaoInsert extends JFrame {
 					e1.printStackTrace();
 				}
 				
-				controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),a, b, fachada.getInstance().getIDUsuarioLogado(), 0.0);
+				boolean ok = controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),a, b, fachada.getInstance().getIDUsuarioLogado(), 0.0);
+				if(ok){
+					JOptionPane.showMessageDialog(null, "Leilao Inserido com Sucesso!");
+					controler.backToPrevious(backTo);
+				} else{
+					JOptionPane.showMessageDialog(null, "Erro ao inserir leilao!");
+				}
 			}
+			
 		});
 		btnInsert.setBounds(327, 231, 117, 29);
 		contentPane.add(btnInsert);

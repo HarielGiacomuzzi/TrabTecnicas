@@ -52,6 +52,12 @@ public class MainWindow {
 		controler = new ControlerPrincipal(this.frame);
 		
 	}
+	
+	public void updateTable(){
+		DefaultTableModel modelo = controlerLeiloes.getLeiloesTableModel();	
+		table.setModel(modelo);
+		table.repaint();
+	}
 
 	/**
 	 * Initialize the contents of the frame.

@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.table.*;
 import business.Leilao;
 import business.Usuario;
+import Apresentacao.MainWindow;
 
 public class ControlerLeiloes {
 	LeilaoFachada leilaoFachada;
