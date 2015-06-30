@@ -36,18 +36,7 @@ public class WindowLeilaoInsert extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					WindowLeilaoInsert frame = new WindowLeilaoInsert();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the frame.
@@ -58,7 +47,7 @@ public class WindowLeilaoInsert extends JFrame {
 		this.backTo = backFrame;
 	}
 	
-	public WindowLeilaoInsert() {
+	public WindowLeilaoInsert(final MainWindow main) {
 		this.controler = new ControlerLeiloes(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -147,6 +136,7 @@ public class WindowLeilaoInsert extends JFrame {
 				boolean ok = controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),a, b, fachada.getInstance().getIDUsuarioLogado(), 0.0);
 				if(ok){
 					JOptionPane.showMessageDialog(null, "Leilao Inserido com Sucesso!");
+					main.updateTable();
 					controler.backToPrevious(backTo);
 				} else{
 					JOptionPane.showMessageDialog(null, "Erro ao inserir leilao!");

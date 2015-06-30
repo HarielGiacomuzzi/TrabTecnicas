@@ -12,8 +12,8 @@ public class ControlerPrincipal {
 		this.frame = window;
 	}
 
-	public void InsertLeilao() {
-		WindowLeilaoInsert inserLeilao = new WindowLeilaoInsert();
+	public void InsertLeilao(MainWindow main) {
+		WindowLeilaoInsert inserLeilao = new WindowLeilaoInsert(main);
 		inserLeilao.setBack(frame);
 		inserLeilao.setVisible(true);
 		frame.setVisible(false);
