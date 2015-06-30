@@ -85,7 +85,8 @@ public class MainWindow {
 		btnVisualizarLeiles.setBounds(10, 215, 119, 23);
 		btnVisualizarLeiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controler.ViewLeilao();
+				
+				controler.ViewDetalheLeilao(1);;
 			}
 		});
 		frame.getContentPane().add(btnVisualizarLeiles);
@@ -114,15 +115,18 @@ public class MainWindow {
 		table.setFillsViewportHeight(true);
 		table.setModel(modelo);
 		table.setBounds(10, 61, 374, 142);
-		/*
+		
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBounds(375, 61, -353, 137);
+		scrollPane.setBounds(10, 61, 374, 142);
 		frame.getContentPane().add(scrollPane);
-		*/
+		frame.validate();
+		
+		/*
 		table_1 = new JTable();
 		table_1.setModel(modelo);
 		table_1.setBounds(34, 61, 329, 118);
 		frame.getContentPane().add(table_1);
+		*/
 		frame.setVisible(true);
 	}
 }

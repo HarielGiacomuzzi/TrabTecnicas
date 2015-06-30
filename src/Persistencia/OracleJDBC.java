@@ -18,8 +18,8 @@ public class OracleJDBC {
 		Connection connection = null;
 		try {
 			connection = DriverManager.getConnection(
-					"jdbc:oracle:thin:@trabtecnicas.cswxrcwy8a8k.us-east-1.rds.amazonaws.com:1521:ORCL", "admin",
-					"trabTecnicas");
+					"jdbc:oracle:thin:@camburi.pucrs.br:1521:FACIN11G", "ai200193",
+					"ai200193");
 		} catch (SQLException e) {
 			System.out.println("Connection Failed! Check output console");
 			e.printStackTrace();

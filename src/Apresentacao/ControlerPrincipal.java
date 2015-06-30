@@ -32,5 +32,12 @@ public class ControlerPrincipal {
 		insertBem.setVisible(true);
 		frame.setVisible(false);
 	}
+	
+	public void ViewDetalheLeilao(int idLeilao){
+		WindowLeilaoDetalhe viewLeilao = new WindowLeilaoDetalhe(1);
+		viewLeilao.setBack(frame);
+		viewLeilao.setVisible(true);
+		frame.setVisible(false);
+	}
 
 }

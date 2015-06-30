@@ -1,13 +1,30 @@
 package Apresentacao;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class WindowLeilaoDetalhe extends JFrame {
-	public WindowLeilaoDetalhe() {
+	
+	private JPanel contentPane;
+	private ControlerLeiloes controler;
+	private JFrame backTo;
+	
+	public void setBack(JFrame frame) {
+		this.backTo = frame;
+		
+	}
+	
+	public WindowLeilaoDetalhe(int idLeilao) {
+		this.controler = new ControlerLeiloes(this);
 		getContentPane().setLayout(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 600, 600);
 		
 		JLabel lblNewLabel = new JLabel("Leilao do usuário:");
 		lblNewLabel.setBounds(73, 11, 125, 14);
@@ -80,5 +97,14 @@ public class WindowLeilaoDetalhe extends JFrame {
 		JButton btnAddLance = new JButton("Adicionar Lance");
 		btnAddLance.setBounds(251, 320, 117, 23);
 		getContentPane().add(btnAddLance);
+		
+		JButton btnBack = new JButton("Back");
+		btnBack.setBounds(362, 7, 89, 23);
+		btnBack.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controler.backToPrevious(backTo);
+			}
+		});
+		getContentPane().add(btnBack);
 	}
 }
