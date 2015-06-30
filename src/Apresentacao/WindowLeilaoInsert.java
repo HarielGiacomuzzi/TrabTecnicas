@@ -10,15 +10,20 @@ import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
+
+import business.LeilaoFachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.Date;
 
 public class WindowLeilaoInsert extends JFrame {
 
 	private JPanel contentPane;
 	private JFrame backTo;
 	private ControlerLeiloes controler;
-
+	private LeilaoFachada fachada;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -100,6 +105,12 @@ public class WindowLeilaoInsert extends JFrame {
 		contentPane.add(formattedTextField_1);
 		
 		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			@SuppressWarnings({ "deprecation", "static-access" })
+			public void actionPerformed(ActionEvent e) {
+				controler.insertLeilao(comboBoxLeilao.getSelectedItem().toString(), comboBoxLance.getSelectedItem().toString(),new Date(2015,06,30), new Date(2015,07,30), fachada.getInstance().getIDUsuarioLogado(), 0.0);
+			}
+		});
 		btnInsert.setBounds(327, 231, 117, 29);
 		contentPane.add(btnInsert);
 	}

@@ -49,7 +49,7 @@ public class LeilaoFachada {
 	}
 
 	public Usuario insertUsuario(String nome, String cpf, String cnpj, String email,String senha) throws FachadaException {
-		/*Inserir validações */
+		/*Inserir validaï¿½ï¿½es */
 		
 		try{
 			int id = usuarioDao.getNextId();
@@ -61,13 +61,20 @@ public class LeilaoFachada {
 			}
 			return null;
 		} catch(UsuarioDAOException e){
-			/*INSERIR throw de Exceção da camada de negócio*/
+			/*INSERIR throw de Exceï¿½ï¿½o da camada de negï¿½cio*/
 			throw new FachadaException(e.getMessage());
 		}
 	}
 	
 	public Leilao insertLeilao(String tipoLeilao, String tipoLance, Date inicio, Date fim, int vendedorID, double preco){
-		int id = 1; /*INSERIR LOGIDA DO ID*/
+		int id = 1;
+		try {
+			id = leilaoDao.getNextId();
+		} catch (LeilaoDAOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		Leilao leilao = new Leilao(id,tipoLeilao,tipoLance,inicio,fim,vendedorID,preco);
 		
 		try{
@@ -77,7 +84,7 @@ public class LeilaoFachada {
 			}
 			return null;
 		} catch(LeilaoDAOException e){
-			/*INSERIR throw de Exceção da camada de negócio*/
+			/*INSERIR throw de Exceï¿½ï¿½o da camada de negï¿½cio*/
 			return null;
 			
 		}

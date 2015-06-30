@@ -33,8 +33,8 @@ public class ControlerLeiloes {
 		this.frame.setVisible(false);
 	}
 
-
 	public boolean insertLeilao(String tipoLeilao, String tipoLance, Date inicio, Date fim, int vendedorID, double preco) {
+		leilaoFachada = LeilaoFachada.getInstance();
 		Leilao leilao = leilaoFachada.insertLeilao(tipoLeilao,tipoLance,inicio,fim,vendedorID,preco);
 		if(leilao != null){
 			return true;

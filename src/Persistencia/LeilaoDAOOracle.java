@@ -77,14 +77,15 @@ public class LeilaoDAOOracle implements LeilaoDAO {
             Connection con = new OracleJDBC().getConnection();            
             PreparedStatement stmt = con.prepareStatement("INSERT INTO leilao (id_leilao, tipo_leilao, tipo_lance, data_inicio, data_fim, vendedor_fk , preco ) VALUES (?,?,?,?,?,?,?)");
             stmt.setInt(1, leilao.getId());
-            stmt.setString(2, leilao.getTipoLeilao()+"");
-            stmt.setString(3, leilao.getTipoLance()+"");
-            stmt.setDate(4, (java.sql.Date) leilao.getDataInicio());
-            stmt.setDate(5, (java.sql.Date) leilao.getDataFim());
-            stmt.setInt(5, leilao.getIdVendedor());
-            stmt.setDouble(5, leilao.getPreco());
+            stmt.setString(2, leilao.getTipoLeilao().charAt(0)+"");
+            stmt.setString(3, leilao.getTipoLance().charAt(0)+"");
+            stmt.setDate(4, new java.sql.Date(leilao.getDataInicio().getTime()));
+            stmt.setDate(5, new java.sql.Date(leilao.getDataFim().getTime()));
+            stmt.setInt(6, leilao.getIdVendedor());
+            stmt.setDouble(7, leilao.getPreco());
             int ret = stmt.executeUpdate();
             con.close();
+            System.out.println(ret);
             return (ret>0);
         } catch (SQLException ex) {
             throw new LeilaoDAOException("Falha ao adicionar.", ex);

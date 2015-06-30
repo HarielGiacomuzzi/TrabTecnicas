@@ -9,5 +9,7 @@ public interface LeilaoDAO {
 	public abstract boolean insertLeilao(Leilao leilao) throws LeilaoDAOException;
 
 	public abstract boolean removeLeilao(Leilao leilao) throws LeilaoDAOException;
+	
+	public abstract int getNextId() throws LeilaoDAOException;
 
 }
