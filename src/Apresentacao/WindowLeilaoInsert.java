@@ -126,9 +126,6 @@ public class WindowLeilaoInsert extends JFrame {
 		btnInsert.addActionListener(new ActionListener() {
 			@SuppressWarnings({ "static-access" })
 			public void actionPerformed(ActionEvent e) {				
-				System.out.println(formattedTextField.getValue().toString());
-				System.out.println(formattedTextField_1.getValue().toString());
-				
 				DateFormat df = new SimpleDateFormat("EEE MMM dd kk:mm:ss z yyyy", Locale.ENGLISH);
 				
 				Date a = new Date();

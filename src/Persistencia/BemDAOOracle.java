@@ -34,7 +34,7 @@ public class BemDAOOracle implements BemDAO {
                 int id1 = resultado.getInt("id_bem");
                 String descBreve = resultado.getString("desc_Breve");
                 String descCompleta = resultado.getString("desc_Completa");
-                int idCategoria = resultado.getInt("categoria_fk");
+                String idCategoria = resultado.getString("categoria_fk");
                 int idLeilao = resultado.getInt("leilao_fk");
                 b = new Bem(id1,idLeilao, descBreve, descCompleta, idCategoria);
             }
@@ -74,7 +74,7 @@ public class BemDAOOracle implements BemDAO {
             Connection con = new OracleJDBC().getConnection();
             PreparedStatement stmt = con.prepareStatement("INSERT INTO bens (id_bem, Categoria_fk, desc_Breve, desc_Completa , leilao_fk) VALUES (?,?,?,?,?)");
             stmt.setInt(1, bem.getId());
-            stmt.setInt(2, bem.getIdCategoria());
+            stmt.setString(2, bem.getIdCategoria());
             stmt.setString(3, bem.getDescBreve());
             stmt.setString(4, bem.getDescCompleta());
             stmt.setInt(4, bem.getIdLeilao());

@@ -5,6 +5,8 @@ import java.util.List;
 
 import Persistencia.BemDAOException;
 import Persistencia.BemDAOOracle;
+import Persistencia.CategoriaDAOException;
+import Persistencia.CategoriaDAOOracle;
 import Persistencia.LeilaoDAOException;
 import Persistencia.LeilaoDAOOracle;
 import Persistencia.UsuarioDAOException;
@@ -14,6 +16,7 @@ public class LeilaoFachada {
 	static LeilaoFachada leilao;
 	private UsuarioDAO usuarioDao;
 	private LeilaoDAO leilaoDao;
+	private CategoriaDAO categoriaDao;
 	private BemDAO bemDao;
 	private int IDUsuarioLogado;
 	
@@ -22,6 +25,7 @@ public class LeilaoFachada {
 		usuarioDao = UsuarioDAOOracle.getInstance();
 		leilaoDao = LeilaoDAOOracle.getInstance();
 		bemDao = BemDAOOracle.getInstance();
+		categoriaDao = CategoriaDAOOracle.getInstance();
 	}
 	
 	public static LeilaoFachada getInstance(){
@@ -29,6 +33,15 @@ public class LeilaoFachada {
 			leilao = new LeilaoFachada();
 		}
 		return leilao;
+	}
+	
+	public List<Categoria> getCategorias() throws FachadaException{
+		try{
+		return categoriaDao.getAllCategorias();
+		}
+		catch(CategoriaDAOException ex){
+			throw new FachadaException(ex.getMessage());
+		}
 	}
 	
 	public List<Leilao> getLeiloes() throws FachadaException{
@@ -117,11 +130,10 @@ public class LeilaoFachada {
 		}
 	}
 	
-	public Bem insertBem(int idLeilao, String descBreve, String descCompleta, int idCategoria){
+	public Bem insertBem(int idLeilao, String descBreve, String descCompleta, String string){
 		try{
 		int id = bemDao.getNextId();
-		Bem bem = new Bem(id,idLeilao,descBreve,descCompleta,idCategoria);
-		
+		Bem bem = new Bem(id, idLeilao, descBreve, descCompleta, string);
 		boolean ok = bemDao.insertBem(bem);
 		
 		if(ok){

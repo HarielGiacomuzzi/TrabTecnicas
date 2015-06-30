@@ -1,9 +1,11 @@
 package Apresentacao;
 
+import business.FachadaException;
 import business.LeilaoFachada;
 import business.Categoria;
 import business.Bem;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 public class ControlerBens {
 	LeilaoFachada leilaoFachada;
 	JFrame frame;
+	String categorias[];
 	
 	public ControlerBens(){
 		leilaoFachada = LeilaoFachada.getInstance();
@@ -22,8 +25,8 @@ public class ControlerBens {
 	}
 
 
-	public boolean insertBem(int idLeilao, String descBreve, String descCompleta, int idCategoria) {
-		Bem bem = leilaoFachada.insertBem(idLeilao, descBreve, descCompleta, idCategoria);
+	public boolean insertBem(int idLeilao, String descBreve, String descCompleta, String string) {
+		Bem bem = leilaoFachada.insertBem(idLeilao, descBreve, descCompleta, string);
 		if(bem!=null){
 			return true;
 		}
@@ -42,6 +45,22 @@ public class ControlerBens {
 	public void previousWindow(JFrame backTo) {
 		this.frame.setVisible(false);
 		backTo.setVisible(true);
+	}
+
+
+	public void prepareContentOfCategorias() {
+		try {
+			LinkedList<Categoria> lst = (LinkedList<Categoria>) leilaoFachada.getCategorias();
+			categorias = new String[lst.size()];
+			Categoria aux[] = (Categoria[])lst.toArray();
+			for(int i = 0; i < lst.size(); i++){
+				categorias[i] = aux[i].getDescCategoria();
+			}
+			
+		} catch (FachadaException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

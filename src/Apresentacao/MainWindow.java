@@ -62,8 +62,8 @@ public class MainWindow {
 		frame.setBounds(100, 100, 450, 374);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnNewButton_1 = new JButton("Cadastrar Leiloes");
-		btnNewButton_1.setBounds(147, 264, 150, 23);
+		JButton btnNewButton_1 = new JButton("Cadastrar Leilao");
+		btnNewButton_1.setBounds(234, 215, 150, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controler.InsertLeilao();
@@ -72,16 +72,7 @@ public class MainWindow {
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(btnNewButton_1);
 		
-		JButton btnNewButton_2 = new JButton("Cadastrar Bens");
-		btnNewButton_2.setBounds(289, 215, 140, 23);
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controler.insertBens();
-			}
-		});
-		frame.getContentPane().add(btnNewButton_2);
-		
-		JButton btnVisualizarLeiles = new JButton("Visualizar Leiloes");
+		JButton btnVisualizarLeiles = new JButton("Visualizar Leilao");
 		btnVisualizarLeiles.setBounds(10, 215, 150, 23);
 		btnVisualizarLeiles.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

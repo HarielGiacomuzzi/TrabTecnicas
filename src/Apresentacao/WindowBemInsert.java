@@ -21,6 +21,8 @@ public class WindowBemInsert extends JFrame {
 	private ControlerBens controler;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JTextField textField_2;
+	private int idLeilao;
 
 	/**
 	 * Launch the application.
@@ -64,9 +66,7 @@ public class WindowBemInsert extends JFrame {
 		lblCategoria.setBounds(18, 60, 61, 16);
 		contentPane.add(lblCategoria);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(91, 56, 52, 27);
-		contentPane.add(comboBox);
+		controler.prepareContentOfCategorias();
 		
 		JLabel lblDescrioBreve = new JLabel("Descrição Breve");
 		lblDescrioBreve.setBounds(18, 102, 117, 16);
@@ -81,17 +81,32 @@ public class WindowBemInsert extends JFrame {
 		lblDescrioCompleta.setBounds(18, 158, 134, 16);
 		contentPane.add(lblDescrioCompleta);
 		
-		JTextArea textArea = new JTextArea();
+		final JTextArea textArea = new JTextArea();
 		textArea.setBounds(180, 158, 188, 94);
 		contentPane.add(textArea);
 		
 		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				boolean insertBem = controler.insertBem(idLeilao, textField_1.getText(), textArea.getText(), textField_2.getText());
+			}
+		});
 		btnInsert.setBounds(6, 223, 117, 29);
 		contentPane.add(btnInsert);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(131, 58, 134, 20);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
 		
 	}
 
 	public void setBack(JFrame frame) {
 		this.backTo = frame;
+	}
+	
+	public void setIdLeilao(int i){
+		this.idLeilao = i;
+		
 	}
 }
